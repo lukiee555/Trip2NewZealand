@@ -2748,6 +2748,172 @@
         }
       }
     </style>
+    <style id="mobile-checklist-visibility-fix">
+      @media (max-width: 1160px) {
+        .checklist-drawer .task-row em {
+          color: #e8f0f2 !important;
+          opacity: 1 !important;
+        }
+        .checklist-drawer .task-row {
+          color: #e8f0f2 !important;
+        }
+        .checklist-drawer .fake-check {
+          border-color: #8aa0aa !important;
+        }
+      }
+    </style>
+    <style id="doubtful-toggle-styles">
+      .itinerary-choice {
+        scroll-margin-top: 18px;
+        margin: 30px 0 18px;
+        background: linear-gradient(135deg, #fffdf9, #eef4f0);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 20px 22px;
+        box-shadow: 0 7px 24px rgba(27, 45, 56, 0.06);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: center;
+      }
+      .itinerary-choice h2 {
+        font-size: 25px;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        margin: 5px 0 7px;
+      }
+      .itinerary-choice p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        max-width: 780px;
+      }
+      .variant-choice-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+      }
+      .variant-switch-control {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #172933;
+        color: #fff;
+        border-radius: 999px;
+        padding: 8px 13px 8px 9px;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 8px 20px rgba(23, 41, 51, 0.16);
+      }
+      .variant-switch-control input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .variant-switch-track {
+        width: 44px;
+        height: 25px;
+        border-radius: 999px;
+        background: #5d6f78;
+        position: relative;
+        transition: 0.2s ease;
+        flex: 0 0 auto;
+      }
+      .variant-switch-thumb {
+        position: absolute;
+        width: 19px;
+        height: 19px;
+        left: 3px;
+        top: 3px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+        transition: 0.2s ease;
+      }
+      .variant-switch-control input:checked + .variant-switch-track {
+        background: #2b947f;
+      }
+      .variant-switch-control
+        input:checked
+        + .variant-switch-track
+        .variant-switch-thumb {
+        transform: translateX(19px);
+      }
+      .variant-switch-control input:focus-visible + .variant-switch-track {
+        outline: 3px solid rgba(199, 142, 37, 0.55);
+        outline-offset: 3px;
+      }
+      .variant-switch-label {
+        font-size: 12px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+      .variant-status {
+        display: inline-flex;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: #e6ece8;
+        color: #3d5059;
+        font-size: 10px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .variant-status.included {
+        background: #e1f2eb;
+        color: #17664f;
+      }
+      .variant-plan-summary {
+        font-weight: 750;
+        color: #43545d !important;
+        margin-top: 7px !important;
+      }
+      #fiordland-variant-days {
+        display: contents;
+      }
+      [data-doubtful-only][hidden],
+      [data-variant-copy][hidden] {
+        display: none !important;
+      }
+      @media (max-width: 860px) {
+        .itinerary-choice {
+          grid-template-columns: 1fr;
+          padding: 17px;
+        }
+        .variant-choice-actions {
+          align-items: flex-start;
+        }
+        .variant-switch-control {
+          width: 100%;
+          justify-content: flex-start;
+        }
+        .variant-switch-label {
+          white-space: normal;
+        }
+      }
+      @media print {
+        .itinerary-choice {
+          box-shadow: none;
+          border-radius: 12px;
+          padding: 10px 12px;
+          break-inside: avoid;
+        }
+        .variant-switch-control {
+          display: none !important;
+        }
+        .variant-choice-actions {
+          align-items: flex-start;
+        }
+        .variant-status {
+          font-size: 8pt;
+        }
+        .variant-plan-summary {
+          font-size: 8pt !important;
+        }
+      }
+    </style>
   </head>
   <body id="top">
     <aside aria-label="Trip checklist" class="left-rail screen-only">
@@ -2991,7 +3157,6 @@
         ><span class="rail-foot-icon">↗</span><span>Full master route</span></a
       >
     </nav>
-
     <div class="mobile-tools screen-only">
       <button onclick="openChecklist()">Checklist</button
       ><a href="#master-route">Route</a><a href="#overview">Top</a>
@@ -3222,11 +3387,9 @@
         <div class="hero-stats">
           <span class="hero-stat">28 Mar - 18 Apr 2027</span
           ><span class="hero-stat">20 road days + arrival + flight</span
-          ><span class="hero-stat">Campervan: 29 Mar - 17 Apr</span
-          ><span class="hero-stat">North + South Island</span
           ><span class="hero-stat"
-            >2 Queenstown days + Milford + full Mt Cook day protected</span
-          >
+            >3 x Indie Campers Comfort Standard - 29 Mar to 17 Apr</span
+          ><span class="hero-stat">North + South Island</span>
         </div>
         <div class="hero-actions screen-only">
           <button
@@ -3236,33 +3399,12 @@
           >
             Download shareable PDF
           </button>
-          <button class="btn btn-secondary" onclick="window.print()">
-            Print current state
-          </button>
           <a class="btn btn-secondary" href="#planning-center"
             >Open booking centre</a
           >
           <a class="btn btn-secondary" href="#daily-roadmap"
             >Jump to itinerary</a
           >
-        </div>
-      </section>
-      <section class="alert-band">
-        <div class="alert-card">
-          <strong>Planning-time method</strong>
-          <p>
-            Drive baselines are current routing estimates. The displayed
-            campervan allowance adds about 15% for vehicle pace only; meals,
-            fuel, photos, driver breaks, ferry delays and closures are separate.
-            Refresh every linked Google Maps route before travel.
-          </p>
-        </div>
-        <div class="alert-card warning">
-          <strong>Do not lock unsafe assumptions</strong>
-          <p>
-            All April 2027 operator schedules, tide windows, ferry times, road
-            access and campsite inventory must be reconfirmed when released.
-          </p>
         </div>
       </section>
       <section class="quick-index screen-only">
@@ -3299,7 +3441,6 @@
           >
         </div>
       </section>
-
       <section class="section" id="planning-center">
         <details class="mega-accordion">
           <summary>
@@ -3307,8 +3448,8 @@
               <div class="section-kicker">Executive planning</div>
               <h2>Booking Center</h2>
               <p>
-                Flights, campervan, advance activities, visa and preparation
-                tools. Local checkboxes and references stay in this browser.
+                Flights, 3 campervans, advance activities and visa - only the
+                booking decisions we need before departure.
               </p>
             </div>
             <div class="mega-summary-side">
@@ -3317,15 +3458,6 @@
             </div>
           </summary>
           <div class="mega-body">
-            <div class="progress-shell">
-              <div class="progress-top">
-                <span>Combined booking + preparation progress</span
-                ><span data-progress-text="">0 complete</span>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill" data-progress-fill=""></div>
-              </div>
-            </div>
             <div class="planning-tabs">
               <nav class="tab-nav screen-only">
                 <button class="tab-btn active" data-tab="tab-flights">
@@ -3351,14 +3483,14 @@
               >
                 <div class="panel-intro">
                   <div>
-                    <h3>Flight booking</h3>
+                    <h3>Flights booking - both legs</h3>
                     <p>
-                      The current candidate gets the group back to Bengaluru on
-                      18 April itself. Keep 17 April locked for campervan return
+                      Book SQ298 and SQ510 as one connected itinerary if
+                      available. Keep 17 April protected for campervan return
                       and the Christchurch airport hotel.
                     </p>
                   </div>
-                  <span class="status-chip">Candidate - not ticketed</span>
+                  <span class="status-chip">SQ298 + SQ510</span>
                 </div>
                 <div class="flight-card">
                   <div class="flight-leg">
@@ -3388,7 +3520,7 @@
                     href="https://www.singaporeair.com/"
                     rel="noopener"
                     target="_blank"
-                    >Singapore Airlines</a
+                    >Book / check Singapore Airlines</a
                   ><a
                     class="mini-link official"
                     href="https://www.changiairport.com/en/airport-guide/attractions-and-services.html"
@@ -3396,66 +3528,6 @@
                     target="_blank"
                     >Changi airside attractions</a
                   >
-                </div>
-                <div class="field-grid">
-                  <div class="field">
-                    <label>Booking status</label
-                    ><select class="persist" data-store="flight-status">
-                      <option>Not started</option>
-                      <option>Fare tracking</option>
-                      <option>On hold</option>
-                      <option>Booked</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label>Airline PNR</label
-                    ><input
-                      class="persist"
-                      data-store="flight-pnr"
-                      placeholder="Add after booking"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Ticketing deadline</label
-                    ><input
-                      class="persist"
-                      data-store="flight-deadline"
-                      placeholder="DD MMM YYYY"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Airport hotel ref</label
-                    ><input
-                      class="persist"
-                      data-store="airport-hotel-ref"
-                      placeholder="Confirmation"
-                    />
-                  </div>
-                </div>
-                <div class="info-grid" style="margin-top: 14px">
-                  <article class="info-card">
-                    <h4>Book on one PNR</h4>
-                    <p>
-                      Prefer one through-ticket so baggage, disruption handling
-                      and connection protection stay together.
-                    </p>
-                  </article>
-                  <article class="info-card">
-                    <h4>Fare strategy</h4>
-                    <p>
-                      Before visa approval, use a refundable / changeable fare
-                      or a documented hold rather than an unprotected
-                      non-refundable purchase.
-                    </p>
-                  </article>
-                  <article class="info-card">
-                    <h4>Changi plan</h4>
-                    <p>
-                      A 2h25 connection is for airside exploration only. Do not
-                      attempt Jewel or immigration unless the connection changes
-                      materially.
-                    </p>
-                  </article>
                 </div>
               </section>
               <section
@@ -3468,142 +3540,40 @@
                   <div>
                     <h3>Campervan booking</h3>
                     <p>
-                      One six-berth vehicle is possible but tight for six
-                      adults. Compare the real bed layout, storage and payload -
-                      not only the marketing capacity.
+                      Chosen setup: three Indie Campers Comfort Standard
+                      campervans for six adults.
                     </p>
                   </div>
                   <span class="status-chip"
-                    >Auckland 29 Mar - Christchurch 17 Apr</span
+                    >3 vans - Auckland 29 Mar to Christchurch 17 Apr</span
                   >
                 </div>
                 <div class="info-grid">
                   <article class="info-card">
-                    <h4>Vehicle non-negotiables</h4>
-                    <ul>
-                      <li>6 legal travel seats and 6 berths</li>
-                      <li>Current green self-containment warrant</li>
-                      <li>
-                        Automatic transmission, heating, toilet and shower
-                      </li>
-                      <li>Exact height / length for ferry and campsites</li>
-                      <li>Enough payload and storage for six soft bags</li>
-                    </ul>
-                  </article>
-                  <article class="info-card">
-                    <h4>Contract checks</h4>
-                    <ul>
-                      <li>One-way fee and branch hours</li>
-                      <li>Zero / low excess cover, windscreen and tyres</li>
-                      <li>All drivers added and licences accepted</li>
-                      <li>Roadside recovery and towing exclusions</li>
-                      <li>Cancellation / change terms around visa timing</li>
-                      <li>
-                        Airline / NZ import check before carrying toilet
-                        chemicals
-                      </li>
-                    </ul>
-                  </article>
-                  <article class="info-card">
-                    <h4>Written road approvals</h4>
-                    <ul>
-                      <li>Rob Roy / Raspberry Creek gravel and fords</li>
-                      <li>Moke Lake gravel access</li>
-                      <li>Lilybank Road</li>
-                      <li>Crown Range Road - many rentals prohibit it</li>
-                      <li>Any unsealed road over the contract threshold</li>
-                    </ul>
-                  </article>
-                </div>
-                <div class="info-grid" style="margin-top: 12px">
-                  <article class="info-card">
-                    <h4>Maui - 6 berth range</h4>
+                    <h4>Chosen vehicle</h4>
                     <p>
-                      Premium comparison; verify final 2027 model and branch
-                      inventory.
+                      3 x Indie Campers Comfort Standard. Plan two adults per
+                      campervan and keep the three vehicles together for ferry,
+                      campsites and daily departures.
                     </p>
-                    <a
-                      class="mini-link official"
-                      href="https://www.maui-rentals.com/nz/en/motorhome-hire/6-berth"
-                      rel="noopener"
-                      target="_blank"
-                      >Compare</a
-                    >
                   </article>
                   <article class="info-card">
-                    <h4>Britz - 6 berth range</h4>
+                    <h4>Booking details to confirm</h4>
                     <p>
-                      Check road restrictions carefully before building
-                      Cardrona, Moke Lake and Rob Roy around it.
+                      Pickup: Auckland 29 Mar. Return: Christchurch 17 Apr. Add
+                      all intended drivers, insurance/excess cover, branch hours
+                      and each van's exact registration/dimensions when issued.
                     </p>
-                    <a
-                      class="mini-link official"
-                      href="https://www.britz.com/nz/en/campervans"
-                      rel="noopener"
-                      target="_blank"
-                      >Compare</a
-                    >
                   </article>
                   <article class="info-card">
-                    <h4>Apollo Euro Deluxe</h4>
+                    <h4>Route + overnight checks</h4>
                     <p>
-                      Six-berth comparison; send final dimensions to ferry and
-                      every campsite.
+                      Book three campervan spaces wherever required. Confirm the
+                      rental rules for Rob Roy/Raspberry Creek, Moke Lake,
+                      Lilybank Road, Crown Range and other unsealed access
+                      before using those roads.
                     </p>
-                    <a
-                      class="mini-link official"
-                      href="https://www.apollocamper.co.nz/vehicles/campervans/euro-deluxe"
-                      rel="noopener"
-                      target="_blank"
-                      >Compare</a
-                    >
                   </article>
-                </div>
-                <div class="field-grid">
-                  <div class="field">
-                    <label>Provider</label
-                    ><input
-                      class="persist"
-                      data-store="camper-provider"
-                      placeholder="Maui / Britz / Apollo / other"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Booking reference</label
-                    ><input
-                      class="persist"
-                      data-store="camper-ref"
-                      placeholder="Reference"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Vehicle dimensions</label
-                    ><input
-                      class="persist"
-                      data-store="camper-size"
-                      placeholder="L x W x H"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Road approval record</label
-                    ><input
-                      class="persist"
-                      data-store="camper-road-approval"
-                      placeholder="Email / case number"
-                    />
-                  </div>
-                </div>
-                <div
-                  class="alert-card warning chemicals-alert"
-                  style="margin-top: 14px"
-                >
-                  <strong>Campervan toilet chemicals from India</strong>
-                  <p>
-                    Keep this on the to-do list only after the airline, product
-                    safety sheet and New Zealand biosecurity / import rules are
-                    checked. The operationally safest fallback is to buy an
-                    approved product after pickup.
-                  </p>
                 </div>
               </section>
               <section
@@ -3622,7 +3592,9 @@
                       operator site before paying.
                     </p>
                   </div>
-                  <span class="status-chip">15 tracked decisions</span>
+                  <span class="status-chip" id="bookingDecisionCount"
+                    >14 booking decisions</span
+                  >
                 </div>
                 <div class="booking-table-wrap">
                   <table class="booking-table">
@@ -3634,90 +3606,9 @@
                         <th>Priority</th>
                         <th>When</th>
                         <th>Links</th>
-                        <th>Reference</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td class="check-cell">
-                          <input
-                            class="persist booking-check"
-                            data-store="book-flight"
-                            id="book-flight"
-                            type="checkbox"
-                          /><label for="book-flight"><span></span></label>
-                        </td>
-                        <td><b>18 Apr</b></td>
-                        <td>
-                          <strong
-                            >Return flights - SQ298 + SQ510 candidate</strong
-                          ><small
-                            >Prefer one PNR for through baggage; choose flexible
-                            / changeable fares until visa approval.</small
-                          >
-                        </td>
-                        <td>
-                          <span class="tier tier-book-first">Book first</span>
-                        </td>
-                        <td>
-                          As soon as fare and visa-risk strategy are agreed
-                        </td>
-                        <td>
-                          <a
-                            class="mini-link official"
-                            href="https://www.singaporeair.com/"
-                            rel="noopener"
-                            target="_blank"
-                            >Official</a
-                          >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-flight"
-                            placeholder="Reference / status"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="check-cell">
-                          <input
-                            class="persist booking-check"
-                            data-store="book-camper"
-                            id="book-camper"
-                            type="checkbox"
-                          /><label for="book-camper"><span></span></label>
-                        </td>
-                        <td><b>29 Mar-17 Apr</b></td>
-                        <td>
-                          <strong>One-way six-berth campervan</strong
-                          ><small
-                            >Compare Maui, Britz and Apollo; require green
-                            self-containment, written road approvals and exact
-                            vehicle dimensions.</small
-                          >
-                        </td>
-                        <td>
-                          <span class="tier tier-book-first">Book first</span>
-                        </td>
-                        <td>Immediately after dates are locked</td>
-                        <td>
-                          <a
-                            class="mini-link official"
-                            href="https://www.britz.com/nz/en"
-                            rel="noopener"
-                            target="_blank"
-                            >Official</a
-                          >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-camper"
-                            placeholder="Reference / status"
-                          />
-                        </td>
-                      </tr>
                       <tr>
                         <td class="check-cell">
                           <input
@@ -3729,10 +3620,11 @@
                         </td>
                         <td><b>2 Apr</b></td>
                         <td>
-                          <strong>Cook Strait vehicle ferry</strong
+                          <strong>Cook Strait ferry - 3 campervans</strong
                           ><small
-                            >Book the actual campervan length / height and use
-                            the operator vehicle check-in deadline.</small
+                            >Book all 3 campervans using each vehicle's actual
+                            length / height and use the operator vehicle
+                            check-in deadline.</small
                           >
                         </td>
                         <td>
@@ -3747,13 +3639,6 @@
                             target="_blank"
                             >Official</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-ferry"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                       <tr>
@@ -3792,13 +3677,6 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-hobbiton"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -3835,13 +3713,6 @@
                             target="_blank"
                             >Klook</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-waitomo"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                       <tr>
@@ -3882,13 +3753,6 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-redwoods"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -3927,13 +3791,6 @@
                             target="_blank"
                             >Klook</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-hellsgate"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                       <tr>
@@ -3974,13 +3831,6 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-huka"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -4017,13 +3867,6 @@
                             >Official</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-mouwaho"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -4037,10 +3880,15 @@
                         <td><b>10 Apr</b></td>
                         <td>
                           <strong>NZONE Skydive Queenstown - 09:00</strong
-                          ><small
+                          ><small data-variant-copy="original"
                             >Protect the morning. Use 11 April as the dedicated
                             weather-reschedule window; Glenorchy shortens before
                             Milford or Mt Cook changes.</small
+                          ><small data-variant-copy="doubtful" hidden
+                            >Protect the 10 April morning. If weather moves the
+                            jump to 11 April, Moke Lake and Bob's Cove drop
+                            before the Te Anau arrival or later must-dos
+                            change.</small
                           >
                         </td>
                         <td>
@@ -4064,13 +3912,6 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-skydive"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -4084,10 +3925,14 @@
                         <td><b>10 Apr</b></td>
                         <td>
                           <strong>Skyline Queenstown gondola + luge</strong
-                          ><small
+                          ><small data-variant-copy="original"
                             >Use a flexible afternoon entry after the skydive;
                             11 April can absorb it if weather delays the
                             jump.</small
+                          ><small data-variant-copy="doubtful" hidden
+                            >Use a flexible afternoon entry after the skydive.
+                            Do not push Skyline into 11 April if it would delay
+                            the protected Te Anau arrival.</small
                           >
                         </td>
                         <td>
@@ -4111,12 +3956,46 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
+                      </tr>
+                      <tr data-doubtful-only="true" hidden>
+                        <td class="check-cell">
                           <input
-                            class="mini-input persist"
-                            data-store="ref-skyline"
-                            placeholder="Reference / status"
-                          />
+                            class="persist booking-check"
+                            data-store="book-doubtful"
+                            id="book-doubtful"
+                            type="checkbox"
+                          /><label for="book-doubtful"><span></span></label>
+                        </td>
+                        <td><b>12 Apr</b></td>
+                        <td>
+                          <strong
+                            >Patea / Doubtful Sound Wilderness Cruise</strong
+                          ><small
+                            >Prefer the Te Anau pickup option. Confirm the exact
+                            pickup and return time, meeting point, lunch
+                            inclusion and that all 6 adults are on the same
+                            departure. Keep this fixed on 12 April; do not move
+                            it into Milford or Catlins days if cancelled.</small
+                          >
+                        </td>
+                        <td>
+                          <span class="tier tier-book-first">Book first</span>
+                        </td>
+                        <td>Book when April 2027 inventory opens</td>
+                        <td>
+                          <a
+                            class="mini-link official"
+                            href="https://www.realnz.com/en/experiences/day-cruises/doubtful-sound-wilderness-cruises/"
+                            rel="noopener"
+                            target="_blank"
+                            >Official</a
+                          ><a
+                            class="mini-link klook"
+                            href="https://www.klook.com/en-NZ/activity/21863-doubtful-sound-cruise-tour-queenstown/"
+                            rel="noopener"
+                            target="_blank"
+                            >Klook</a
+                          >
                         </td>
                       </tr>
                       <tr>
@@ -4155,13 +4034,6 @@
                             >Klook</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-milford"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -4191,13 +4063,6 @@
                             target="_blank"
                             >Official</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-cathedral"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                       <tr>
@@ -4234,13 +4099,6 @@
                             target="_blank"
                             >Official</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-whitehorse"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                       <tr>
@@ -4279,13 +4137,6 @@
                             >Official</a
                           >
                         </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-mountjohn"
-                            placeholder="Reference / status"
-                          />
-                        </td>
                       </tr>
                       <tr>
                         <td class="check-cell">
@@ -4316,13 +4167,6 @@
                             target="_blank"
                             >Official</a
                           >
-                        </td>
-                        <td>
-                          <input
-                            class="mini-input persist"
-                            data-store="ref-airporthotel"
-                            placeholder="Reference / status"
-                          />
                         </td>
                       </tr>
                     </tbody>
@@ -4404,51 +4248,12 @@
                   </article>
                 </div>
                 <div class="alert-card warning" style="margin-top: 14px">
-                  <strong
-                    >Official planning figures - recheck at payment</strong
-                  >
+                  <strong>Use the official visa page when applying</strong>
                   <p>
-                    Immigration New Zealand currently lists Visitor Visa cost
-                    from NZD 441 and says 80% are processed within about two
-                    weeks; many visitors also pay a NZD 100 International
-                    Visitor Levy. The application must show enough funds and a
-                    credible plan to leave. Fees and processing times can change
-                    before 2027.
+                    Target the application around January 2027 as planned.
+                    Recheck the document list, fee, levy and processing guidance
+                    at the time of application.
                   </p>
-                </div>
-                <div class="field-grid">
-                  <div class="field">
-                    <label>Application target</label
-                    ><input
-                      class="persist"
-                      data-store="visa-target"
-                      value="January 2027"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Applicant 1 / group ref</label
-                    ><input
-                      class="persist"
-                      data-store="visa-ref-1"
-                      placeholder="Application number"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Applicant 2 / group ref</label
-                    ><input
-                      class="persist"
-                      data-store="visa-ref-2"
-                      placeholder="Application number"
-                    />
-                  </div>
-                  <div class="field">
-                    <label>Decision / expiry notes</label
-                    ><input
-                      class="persist"
-                      data-store="visa-decision"
-                      placeholder="Add after approval"
-                    />
-                  </div>
                 </div>
               </section>
               <section
@@ -4694,7 +4499,8 @@
               <h2>Camping Directory</h2>
               <p>
                 Three practical campground choices for every principal overnight
-                area. Daily cards still keep their local shortlist.
+                area. When booking, reserve space for all 3 campervans together
+                where possible.
               </p>
             </div>
             <div class="mega-summary-side">
@@ -4702,12 +4508,6 @@
             </div>
           </summary>
           <div class="mega-body">
-            <div class="camp-search screen-only">
-              <input
-                id="campSearch"
-                placeholder="Filter by place or campground name"
-              />
-            </div>
             <section class="camp-area" data-camp-area="waitomo">
               <div class="camp-area-head">
                 <h3>Waitomo</h3>
@@ -5295,6 +5095,9 @@
               </div>
             </section>
             <section class="camp-area" data-camp-area="te anau">
+              <div id="te-anau-camp-content"></div>
+            </section>
+            <template id="te-anau-camp-original-template">
               <div class="camp-area-head">
                 <h3>Te Anau</h3>
                 <span>3 route-fit options</span>
@@ -5352,7 +5155,73 @@
                   >
                 </article>
               </div>
-            </section>
+            </template>
+            <template id="te-anau-camp-doubtful-template">
+              <div class="camp-area-head">
+                <h3>Te Anau</h3>
+                <span>3 options - book 11-13 Apr together</span>
+              </div>
+              <div class="camp-warning fiordland-base-note">
+                <strong>Best operating setup:</strong> book the same Te Anau
+                campground for all 3 campervans for the nights of 11, 12 and 13
+                April. This avoids moving camp between Doubtful Sound and
+                Milford Sound.
+              </div>
+              <div class="directory-grid">
+                <article class="directory-card">
+                  <div class="directory-num">1</div>
+                  <div>
+                    <small>Primary Milford fit</small>
+                    <h4>Te Anau Lakeview Holiday Park</h4>
+                    <p>
+                      Lakefront powered sites and a practical base for both
+                      Doubtful and Milford. Try to hold 3 adjacent campervan
+                      sites for 11-13 April.
+                    </p>
+                  </div>
+                  <a
+                    href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                    rel="noopener"
+                    target="_blank"
+                    >Official / direct</a
+                  >
+                </article>
+                <article class="directory-card">
+                  <div class="directory-num">2</div>
+                  <div>
+                    <small>Central town option</small>
+                    <h4>Te Anau TOP 10 Holiday Park</h4>
+                    <p>
+                      Useful for groceries, fuel and cruise logistics; confirm
+                      the exact pickup point and early-departure access.
+                    </p>
+                  </div>
+                  <a
+                    href="https://teanautop10.co.nz/"
+                    rel="noopener"
+                    target="_blank"
+                    >Official / direct</a
+                  >
+                </article>
+                <article class="directory-card">
+                  <div class="directory-num">3</div>
+                  <div>
+                    <small>Facilities backup</small>
+                    <h4>Tasman Holiday Parks - Te Anau</h4>
+                    <p>
+                      Full holiday-park facilities close to town; a comfortable
+                      three-night base for the two Fiordland cruise days.
+                    </p>
+                  </div>
+                  <a
+                    href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                    rel="noopener"
+                    target="_blank"
+                    >Official / direct</a
+                  >
+                </article>
+              </div>
+            </template>
             <section class="camp-area" data-camp-area="catlins">
               <div class="camp-area-head">
                 <h3>Catlins</h3>
@@ -5554,7 +5423,42 @@
           </div>
         </details>
       </section>
+      <section class="itinerary-choice" id="itinerary-choice">
+        <div class="variant-choice-copy">
+          <div class="section-kicker">Itinerary option</div>
+          <h2>Choose the Fiordland version</h2>
+          <p>
+            Keep the original plan while the switch is off. Turn it on to move
+            the Queenstown-area stops to 11 April, sleep in Te Anau, add
+            Doubtful Sound on 12 April and retain Milford Sound on 13 April.
+          </p>
+          <p class="variant-plan-summary" id="variantPlanSummary">
+            Original plan: Queenstown / Glenorchy flex on 11 Apr, Moke Lake to
+            Te Anau on 12 Apr, Milford on 13 Apr.
+          </p>
+        </div>
+        <div class="variant-choice-actions">
+          <label class="variant-switch-control" for="doubtfulSoundToggle">
+            <input
+              aria-describedby="variantPlanSummary"
+              id="doubtfulSoundToggle"
+              role="switch"
+              type="checkbox"
+            />
+            <span class="variant-switch-track"
+              ><span class="variant-switch-thumb"></span
+            ></span>
+            <span class="variant-switch-label">Include Doubtful Sound</span>
+          </label>
+          <span class="variant-status" id="variantStatus"
+            >Original plan active</span
+          >
+        </div>
+      </section>
       <section class="section route-panel" id="master-route">
+        <div id="master-route-content"></div>
+      </section>
+      <template id="master-route-original-template">
         <div class="route-head">
           <h2>One master route - full trip</h2>
           <div>
@@ -5853,7 +5757,334 @@
           Milford - Catlins - Lindis Pass - Lake Pukaki - Aoraki / Mt Cook -
           Lake Tekapo - Christchurch.
         </div>
-      </section>
+      </template>
+      <template id="master-route-doubtful-template">
+        <div class="route-head">
+          <h2>One master route - full trip</h2>
+          <div>
+            <span>Complete route at a glance - no sideways scrolling</span>
+            <div class="route-help">
+              <b>Tap a place</b> - its day  |  <b>Tap a line</b> - that
+              transition day
+            </div>
+          </div>
+        </div>
+        <div class="master-route">
+          <div class="route-band">North Island</div>
+          <div class="route-line">
+            <a class="node n" href="#day-1" title="29 Mar - Road day 1"
+              ><div class="dot">🏙️</div>
+              <div class="label">Auckland</div></a
+            ><a
+              class="connector"
+              href="#day-1"
+              title="29 Mar - Auckland to Hobbiton"
+            ></a>
+            <a class="node n" href="#day-1" title="29 Mar - Road day 1"
+              ><div class="dot">🧙</div>
+              <div class="label">Hobbiton</div></a
+            ><a
+              class="connector"
+              href="#day-1"
+              title="29 Mar - Hobbiton to Waitomo"
+            ></a>
+            <a class="node n" href="#day-2" title="30 Mar - Road day 2"
+              ><div class="dot">🕳</div>
+              <div class="label">Waitomo</div></a
+            ><a
+              class="connector"
+              href="#day-2"
+              title="30 Mar - SH30 to Rotorua"
+            ></a>
+            <a class="node n" href="#day-2" title="30 Mar - Road day 2"
+              ><div class="dot">♨️</div>
+              <div class="label">Rotorua lakes</div></a
+            ><a
+              class="connector"
+              href="#day-3"
+              title="31 Mar - Rotorua to Taupo"
+            ></a>
+            <a class="node n" href="#day-3" title="31 Mar - Road day 3"
+              ><div class="dot">🌊</div>
+              <div class="label">Taupo</div></a
+            ><a
+              class="connector"
+              href="#day-4"
+              title="1 Apr - Taupo to Desert Road"
+            ></a>
+            <a class="node n" href="#day-4" title="1 Apr - Road day 4"
+              ><div class="dot">🛣️</div>
+              <div class="label">Desert Road</div></a
+            ><a
+              class="connector"
+              href="#day-4"
+              title="1 Apr - Desert Road to Wellington"
+            ></a>
+            <a class="node n" href="#day-4" title="1 Apr - Road day 4"
+              ><div class="dot">🏙️</div>
+              <div class="label">Wellington</div></a
+            >
+          </div>
+          <a
+            class="route-turn right ferry-turn"
+            href="#day-5"
+            title="2 Apr - Wellington ferry to Picton"
+            ><span></span
+          ></a>
+          <div class="route-band" style="text-align: right">
+            Cook Strait + West Coast
+          </div>
+          <div class="route-line reverse">
+            <a class="node ferry" href="#day-5" title="2 Apr - Road day 5"
+              ><div class="dot">🚢</div>
+              <div class="label">Cook Strait Ferry</div></a
+            ><a
+              class="connector f"
+              href="#day-5"
+              title="2 Apr - Ferry to Picton"
+            ></a>
+            <a class="node s" href="#day-5" title="2 Apr - Road day 5"
+              ><div class="dot">📍</div>
+              <div class="label">Picton</div></a
+            ><a
+              class="connector"
+              href="#day-5"
+              title="2 Apr - Picton to Westport"
+            ></a>
+            <a class="node s" href="#day-6" title="3 Apr - Road day 6"
+              ><div class="dot">🦭</div>
+              <div class="label">Westport / Cape Foulwind</div></a
+            ><a
+              class="connector"
+              href="#day-6"
+              title="3 Apr - Cape Foulwind to Punakaiki"
+            ></a>
+            <a class="node s" href="#day-6" title="3 Apr - Road day 6"
+              ><div class="dot">🪨</div>
+              <div class="label">Punakaiki</div></a
+            ><a
+              class="connector"
+              href="#day-6"
+              title="3 Apr - Punakaiki to Hokitika Gorge"
+            ></a>
+            <a class="node s" href="#day-6" title="3 Apr - Road day 6"
+              ><div class="dot">🌊</div>
+              <div class="label">Hokitika Gorge</div></a
+            ><a
+              class="connector"
+              href="#day-6"
+              title="3 Apr - Gorge to Lake Kaniere"
+            ></a>
+            <a class="node s" href="#day-6" title="3 Apr - Road day 6"
+              ><div class="dot">🌳</div>
+              <div class="label">Lake Kaniere</div></a
+            ><a
+              class="connector"
+              href="#day-7"
+              title="4 Apr - Hokitika to Franz Josef"
+            ></a>
+            <a class="node s" href="#day-7" title="4 Apr - Road day 7"
+              ><div class="dot">🧊</div>
+              <div class="label">Franz Josef</div></a
+            ><a
+              class="connector"
+              href="#day-8"
+              title="5 Apr - Franz Josef to Fox"
+            ></a>
+            <a class="node s" href="#day-8" title="5 Apr - Road day 8"
+              ><div class="dot">🌅</div>
+              <div class="label">Fox / Lake Matheson</div></a
+            >
+          </div>
+          <a
+            class="route-turn left"
+            href="#day-9"
+            title="6 Apr - Fox Glacier to Haast Pass"
+            ><span></span
+          ></a>
+          <div class="route-band">Haast + Wanaka + Queenstown</div>
+          <div class="route-line">
+            <a class="node s" href="#day-9" title="6 Apr - Road day 9"
+              ><div class="dot">🏔️</div>
+              <div class="label">Haast Pass</div></a
+            ><a
+              class="connector"
+              href="#day-9"
+              title="6 Apr - Haast Pass to Lake Hawea"
+            ></a>
+            <a class="node s" href="#day-9" title="6 Apr - Road day 9"
+              ><div class="dot">🌳</div>
+              <div class="label">Lake Hawea / Kidds Bush</div></a
+            ><a
+              class="connector"
+              href="#day-10"
+              title="7 Apr - Wanaka tracks"
+            ></a>
+            <a class="node s" href="#day-10" title="7 Apr - Road day 10"
+              ><div class="dot">🏔️</div>
+              <div class="label">Wanaka / Rob Roy</div></a
+            ><a
+              class="connector"
+              href="#day-11"
+              title="8 Apr - Isthmus Peak"
+            ></a>
+            <a class="node s" href="#day-11" title="8 Apr - Road day 11"
+              ><div class="dot">🥾</div>
+              <div class="label">Isthmus Peak</div></a
+            ><a
+              class="connector"
+              href="#day-12"
+              title="9 Apr - Wanaka to Cardrona"
+            ></a>
+            <a class="node s" href="#day-12" title="9 Apr - Road day 12"
+              ><div class="dot">🏠</div>
+              <div class="label">Cardrona / Arrowtown</div></a
+            ><a
+              class="connector"
+              href="#day-13"
+              title="10 Apr - Queenstown skydive"
+            ></a>
+            <a class="node s" href="#day-13" title="10 Apr - Road day 13"
+              ><div class="dot">🪂</div>
+              <div class="label">Queenstown</div></a
+            >
+            <a
+              class="connector"
+              href="#queenstown-flex"
+              title="11 Apr - Queenstown to Moke Lake"
+            ></a>
+            <a
+              class="node s"
+              href="#queenstown-flex"
+              title="11 Apr - Road day 14"
+              ><div class="dot">🌅</div>
+              <div class="label">Moke Lake</div></a
+            >
+            <a
+              class="connector"
+              href="#queenstown-flex"
+              title="11 Apr - Moke Lake to Glenorchy"
+            ></a>
+            <a
+              class="node s"
+              href="#queenstown-flex"
+              title="11 Apr - Road day 14"
+              ><div class="dot">🏔️</div>
+              <div class="label">Glenorchy</div></a
+            >
+            <a
+              class="connector"
+              href="#queenstown-flex"
+              title="11 Apr - Glenorchy to Te Anau"
+            ></a>
+            <a
+              class="node s"
+              href="#queenstown-flex"
+              title="11 Apr - Road day 14"
+              ><div class="dot">🌠</div>
+              <div class="label">Te Anau</div></a
+            >
+          </div>
+          <a
+            class="route-turn right"
+            href="#day-14"
+            title="12 Apr - Te Anau to Doubtful Sound"
+            ><span></span
+          ></a>
+          <div class="route-band" style="text-align: right">
+            Fiordland + Catlins + Mackenzie + Return
+          </div>
+          <div class="route-line reverse">
+            <a class="node s" href="#day-14" title="12 Apr - Road day 15"
+              ><div class="dot">🚢</div>
+              <div class="label">Doubtful Sound</div></a
+            >
+            <a
+              class="connector"
+              href="#day-14"
+              title="12 Apr - Return to Te Anau base"
+            ></a>
+            <a class="node s" href="#day-14" title="12 Apr - Night 2 of 3"
+              ><div class="dot">🌠</div>
+              <div class="label">Te Anau</div></a
+            >
+            <a
+              class="connector"
+              href="#day-15"
+              title="13 Apr - Te Anau to Milford Sound"
+            ></a>
+            <a class="node s" href="#day-15" title="13 Apr - Road day 16"
+              ><div class="dot">🚢</div>
+              <div class="label">Milford Sound</div></a
+            ><a
+              class="connector"
+              href="#day-15"
+              title="13 Apr - Milford return to Te Anau"
+            ></a>
+            <a class="node s" href="#day-16" title="14 Apr - Road day 17"
+              ><div class="dot">🌊</div>
+              <div class="label">Cathedral Caves / Catlins</div></a
+            ><a
+              class="connector"
+              href="#day-17"
+              title="15 Apr - Catlins to Lindis Pass"
+            ></a>
+            <a class="node s" href="#day-17" title="15 Apr - Road day 18"
+              ><div class="dot">🏔️</div>
+              <div class="label">Lindis Pass</div></a
+            ><a
+              class="connector"
+              href="#day-17"
+              title="15 Apr - Lindis Pass to Lake Pukaki"
+            ></a>
+            <a class="node s" href="#day-17" title="15 Apr - Road day 18"
+              ><div class="dot">🌊</div>
+              <div class="label">Lake Pukaki</div></a
+            ><a
+              class="connector"
+              href="#day-18"
+              title="16 Apr - Full Mt Cook day"
+            ></a>
+            <a class="node s" href="#day-18" title="16 Apr - Road day 19"
+              ><div class="dot">🏔️</div>
+              <div class="label">Aoraki / Mt Cook</div></a
+            ><a
+              class="connector"
+              href="#day-18"
+              title="16 Apr - Mt Cook to Lake Tekapo"
+            ></a>
+            <a class="node s" href="#day-18" title="16 Apr - Road day 19"
+              ><div class="dot">🌠</div>
+              <div class="label">Lake Tekapo / Mt John</div></a
+            ><a
+              class="connector"
+              href="#day-19"
+              title="17 Apr - Tekapo to Christchurch"
+            ></a>
+            <a class="node s" href="#day-19" title="17 Apr - Road day 20"
+              ><div class="dot">🏙️</div>
+              <div class="label">Christchurch</div></a
+            ><a
+              class="connector tbd"
+              href="#flight-day"
+              title="18 Apr - Return flight"
+            ></a>
+            <a
+              class="node flight"
+              href="#flight-day"
+              title="18 Apr - Flight day"
+              ><div class="dot">✈️</div>
+              <div class="label">Singapore / Bengaluru</div></a
+            >
+          </div>
+        </div>
+        <div class="route-summary">
+          Auckland - Hobbiton - Waitomo - Rotorua - Taupo - Wellington - Cook
+          Strait - West Coast - Wanaka - Queenstown - Moke Lake - Glenorchy - Te
+          Anau - Doubtful Sound - Te Anau - Milford Sound - Catlins - Lindis
+          Pass - Lake Pukaki - Aoraki / Mt Cook - Lake Tekapo - Christchurch.
+        </div>
+      </template>
       <section class="section" id="daily-roadmap">
         <div class="section-head">
           <div>
@@ -5961,7 +6192,6 @@
               </div>
             </div>
           </article>
-
           <article
             class="day-card region-north"
             data-day-label="29 Mar - Auckland - Hobbiton - Waitomo"
@@ -5981,12 +6211,14 @@
               </div>
             </header>
             <div class="booking-strip">
-              <b>Book / confirm:</b><span>Campervan pickup</span
+              <b>Book / confirm:</b
+              ><span>3 x Indie Campers Comfort Standard pickup</span
               ><span>Hobbiton timed entry</span><span>Waitomo campsite</span
               ><span>Arjun Supermarket opening hours / supply list</span>
             </div>
             <div aria-label="Visual day flow" class="day-journey">
-              <span class="journey-stop"><i>🚐</i><b>Campervan pickup</b></span
+              <span class="journey-stop"
+                ><i>🚐</i><b>3 x Indie Campers Comfort Standard pickup</b></span
               ><span class="journey-arrow">&gt;</span
               ><span class="journey-stop"
                 ><i>🛒</i><b>Arjun Supermarket</b></span
@@ -6034,10 +6266,11 @@
                   <div class="timeline-time">08:30</div>
                   <div class="timeline-marker"><span>VAN</span></div>
                   <div class="timeline-content">
-                    <b>Campervan pickup and inspection</b>
+                    <b>3 campervan pickups and inspections</b>
                     <p>
-                      Complete video/photos, test every appliance and load six
-                      adults' bags. Target finish 10:30.
+                      Split into three crews, photograph and inspect each Indie
+                      Campers Comfort Standard, test the essentials and load two
+                      adults' luggage per van. Target all three ready by 10:30.
                     </p>
                   </div>
                 </div>
@@ -8790,683 +9023,1381 @@
               </details>
             </div>
           </article>
-          <article
-            class="day-card region-south"
-            data-day-label="11 Apr - Queenstown flex day - Glenorchy scenic day"
-            id="queenstown-flex"
-          >
-            <header class="day-header">
-              <div class="date-block">
-                <small>Road day 14</small><strong>11 Apr</strong
-                ><span>Sunday</span>
+          <div id="fiordland-variant-days"></div>
+          <template id="fiordland-days-original-template"
+            ><article
+              class="day-card region-south"
+              data-day-label="11 Apr - Queenstown flex day - Glenorchy scenic day"
+              id="queenstown-flex"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 14</small><strong>11 Apr</strong
+                  ><span>Sunday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Queenstown</span><i></i
+                    ><span>Night: Queenstown</span>
+                  </div>
+                  <h3>Queenstown flex day - Glenorchy scenic day</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b><span>Skydive reschedule status</span
+                ><span>Queenstown campsite</span
+                ><span>No separate Glenorchy ticket</span>
               </div>
-              <div class="day-heading">
-                <div class="location-line">
-                  <span>Start: Queenstown</span><i></i
-                  ><span>Night: Queenstown</span>
-                </div>
-                <h3>Queenstown flex day - Glenorchy scenic day</h3>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>📷</i><b>Bob's Cove</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"
+                  ><i>🏔️</i><b>Glenorchy Lagoon</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🏠</i><b>Glenorchy Town</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>⭐</i><b>Queenstown</b></span>
               </div>
-            </header>
-            <div class="booking-strip">
-              <b>Book / confirm:</b><span>Skydive reschedule status</span
-              ><span>Queenstown campsite</span
-              ><span>No separate Glenorchy ticket</span>
-            </div>
-            <div aria-label="Visual day flow" class="day-journey">
-              <span class="journey-stop"><i>📷</i><b>Bob's Cove</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🏔️</i><b>Glenorchy Lagoon</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🏠</i><b>Glenorchy Town</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>⭐</i><b>Queenstown</b></span>
-            </div>
-            <div class="day-body">
-              <div class="morning-grid">
-                <div><small>Wake</small><b>07:30</b></div>
-                <div><small>Breakfast</small><b>08:00-08:45</b></div>
-                <div><small>Start</small><b>09:00 decision anchor</b></div>
-              </div>
-              <div class="timeline">
-                <div class="timeline-row">
-                  <div class="timeline-time">07:30</div>
-                  <div class="timeline-marker"><span>WAK</span></div>
-                  <div class="timeline-content">
-                    <b>Wake and check the skydive status</b>
-                    <p>
-                      This day is intentionally flexible rather than another
-                      overloaded activity day.
-                    </p>
-                  </div>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>07:30</b></div>
+                  <div><small>Breakfast</small><b>08:00-08:45</b></div>
+                  <div><small>Start</small><b>09:00 decision anchor</b></div>
                 </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">08:00</div>
-                  <div class="timeline-marker"><span>BRK</span></div>
-                  <div class="timeline-content">
-                    <b>Breakfast</b>
-                    <p>Finish by 08:45.</p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">09:00</div>
-                  <div class="timeline-marker"><span>ANCH</span></div>
-                  <div class="timeline-content">
-                    <b>Decision anchor</b>
-                    <p>
-                      If the 10 April skydive did not operate, use the earliest
-                      rescheduled slot today. Glenorchy shortens or drops before
-                      any later must-do changes.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">09:15</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Drive to Bob's Cove</b>
-                    <p>
-                      Google baseline about 20 minutes; campervan plan about 25
-                      minutes. Use only when the skydive is complete.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Bob%27s+Cove%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">09:45</div>
-                  <div class="timeline-marker"><span>ACT</span></div>
-                  <div class="timeline-content">
-                    <b>Bob's Cove scenic stop</b>
-                    <p>
-                      Allow 60-75 minutes. This is the first stop removed if the
-                      morning starts late.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">11:15</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Continue to Glenorchy</b>
-                    <p>
-                      Enjoy the Lake Wakatipu road rather than treating it as a
-                      transfer.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Bob%27s+Cove%2C+New+Zealand&amp;destination=Glenorchy%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">12:00</div>
-                  <div class="timeline-marker"><span>FOO</span></div>
-                  <div class="timeline-content">
-                    <b>Glenorchy lunch</b>
-                    <p>Keep the meal relaxed but protect the return drive.</p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">13:00</div>
-                  <div class="timeline-marker"><span>ACT</span></div>
-                  <div class="timeline-content">
-                    <b>Glenorchy Lagoon + Glenorchy town</b>
-                    <p>
-                      Allow 90-120 minutes for the lagoon, waterfront and town.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">15:15</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Return to Queenstown</b>
-                    <p>
-                      Google baseline about 1 hour; campervan plan about 1h10.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Glenorchy%2C+New+Zealand&amp;destination=Queenstown%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">16:30</div>
-                  <div class="timeline-marker"><span>FLEX</span></div>
-                  <div class="timeline-content">
-                    <b>Queenstown free window</b>
-                    <p>
-                      Use for Gardens, lakefront, souvenirs, Skyline backup or
-                      simply rest.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">18:30</div>
-                  <div class="timeline-marker"><span>STY</span></div>
-                  <div class="timeline-content">
-                    <b>Queenstown campsite</b>
-                    <p>Prepare for the early Moke Lake departure.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="day-foot-grid">
-                <div class="supply-box">
-                  <small>Supply run</small>
-                  <p>
-                    Complete any remaining Te Anau / Milford food purchase in
-                    Queenstown if practical.
-                  </p>
-                </div>
-                <div class="decision-box">
-                  <small>Operating note</small>
-                  <p>
-                    This day protects the skydive against weather and gives
-                    Glenorchy proper time. Do not fill it with another major
-                    activity.
-                  </p>
-                </div>
-              </div>
-              <details class="camp-details">
-                <summary>
-                  <span>Camping shortlist</span
-                  ><b>Use the same Queenstown base</b>
-                </summary>
-                <div class="camp-warning">
-                  Curated for route fit and campervan practicality - not a
-                  permanent ranking. Before paying, confirm a powered site for
-                  the exact six-berth length, check-in cutoff, dump facilities
-                  and cancellation terms.
-                </div>
-                <div class="camp-grid">
-                  <article class="camp-pick">
-                    <div class="camp-rank">1</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Primary premium option</div>
-                      <h5>Driftaway Queenstown</h5>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">07:30</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake and check the skydive status</b>
                       <p>
-                        Modern lakefront-style facilities near Frankton; good
-                        for airport-side skydiving logistics.
+                        This day is intentionally flexible rather than another
+                        overloaded activity day.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://www.driftawayqueenstown.co.nz/accomodations/camping-motorhomes-and-caravaning"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">2</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Best Arthur's Point option</div>
-                      <h5>Queenstown TOP 10 Holiday Park</h5>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">08:00</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Breakfast</b>
+                      <p>Finish by 08:45.</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">09:00</div>
+                    <div class="timeline-marker"><span>ANCH</span></div>
+                    <div class="timeline-content">
+                      <b>Decision anchor</b>
                       <p>
-                        Powered sites and shuttle access; compare travel time to
-                        the skydiving check-in point.
+                        If the 10 April skydive did not operate, use the
+                        earliest rescheduled slot today. Glenorchy shortens or
+                        drops before any later must-do changes.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://www.qtowntop10.co.nz/campervan-caravan-camping-sites/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">3</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Best walk-to-town option</div>
-                      <h5>Queenstown Lakeview Holiday Park</h5>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">09:15</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Drive to Bob's Cove</b>
                       <p>
-                        Central and convenient for Skyline and souvenirs;
-                        manoeuvring can be tighter for a large van.
+                        Google baseline about 20 minutes; campervan plan about
+                        25 minutes. Use only when the skydive is complete.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Bob%27s+Cove%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">09:45</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Bob's Cove scenic stop</b>
+                      <p>
+                        Allow 60-75 minutes. This is the first stop removed if
+                        the morning starts late.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://hampshireholidayparks.co.nz/park/queenstown-lakeview-holiday-park/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                </div>
-              </details>
-            </div>
-          </article>
-          <article
-            class="day-card region-south"
-            data-day-label="12 Apr - Moke Lake morning light - Te Anau"
-            id="day-14"
-          >
-            <header class="day-header">
-              <div class="date-block">
-                <small>Road day 15</small><strong>12 Apr</strong
-                ><span>Monday</span>
-              </div>
-              <div class="day-heading">
-                <div class="location-line">
-                  <span>Start: Queenstown</span><i></i
-                  ><span>Night: Te Anau</span>
-                </div>
-                <h3>Moke Lake morning light - Te Anau</h3>
-              </div>
-            </header>
-            <div class="booking-strip">
-              <b>Book / confirm:</b><span>Te Anau campsite</span
-              ><span>No Moke ticket; written campervan road approval</span>
-            </div>
-            <div aria-label="Visual day flow" class="day-journey">
-              <span class="journey-stop"><i>🌅</i><b>Moke Lake</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🚐</i><b>Te Anau</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🛒</i><b>Milford supplies</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>⛺️</i><b>Te Anau</b></span>
-            </div>
-            <div class="day-body">
-              <div class="morning-grid">
-                <div><small>Wake</small><b>05:10</b></div>
-                <div>
-                  <small>Breakfast</small
-                  ><b>Snack 05:25; full breakfast 08:30</b>
-                </div>
-                <div><small>Start</small><b>05:40 departure</b></div>
-              </div>
-              <div class="timeline">
-                <div class="timeline-row">
-                  <div class="timeline-time">05:10</div>
-                  <div class="timeline-marker"><span>WAK</span></div>
-                  <div class="timeline-content">
-                    <b>Wake</b>
-                    <p>
-                      Proceed only with good weather, safe road conditions and
-                      completed skydive.
-                    </p>
                   </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">05:40</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Drive to Moke Lake</b>
-                    <p>
-                      The access includes steep, winding road and about 8 km of
-                      gravel. Written rental approval is required.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Moke+Lake%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">06:25</div>
-                  <div class="timeline-marker"><span>ACT</span></div>
-                  <div class="timeline-content">
-                    <b>Moke Lake morning light</b>
-                    <p>
-                      Moke Lake is now part of the plan, not labelled optional.
-                      Default to the official lakeshore / marked route. The
-                      social-media upper spur is unmarked and should not be used
-                      in darkness, rain, ice or poor visibility.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">08:30</div>
-                  <div class="timeline-marker"><span>BRK</span></div>
-                  <div class="timeline-content">
-                    <b>Full breakfast</b>
-                    <p>Return to Queenstown / Frankton area.</p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">10:00</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Drive to Te Anau</b>
-                    <p>
-                      Google baseline about 2h15; campervan plan about 2h35.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Te+Anau%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">12:40</div>
-                  <div class="timeline-marker"><span>STY</span></div>
-                  <div class="timeline-content">
-                    <b>Te Anau campsite and lunch</b>
-                    <p>
-                      Glenorchy is covered on the 11 April flex day; do not add
-                      it to this transfer.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">14:30</div>
-                  <div class="timeline-marker"><span>SHOP</span></div>
-                  <div class="timeline-content">
-                    <b>Major Milford supply run</b>
-                    <p>
-                      Fuel, breakfast, packed lunch, water and wet-weather
-                      layers.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">18:00</div>
-                  <div class="timeline-marker"><span>RST</span></div>
-                  <div class="timeline-content">
-                    <b>Early dinner and sleep</b>
-                    <p>Prepare for the Milford departure.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="day-foot-grid">
-                <div class="supply-box">
-                  <small>Supply run</small>
-                  <p>
-                    Te Anau fuel, food, water and weather gear for Milford Road.
-                  </p>
-                </div>
-                <div class="decision-box">
-                  <small>Operating note</small>
-                  <p>
-                    Safety precedence: road approval and conditions can cancel
-                    Moke Lake. Glenorchy stays on 11 April and is not reinserted
-                    here.
-                  </p>
-                </div>
-              </div>
-              <details class="camp-details">
-                <summary>
-                  <span>Camping shortlist</span
-                  ><b>Top 3 practical options in Te Anau</b>
-                </summary>
-                <div class="camp-warning">
-                  Curated for route fit and campervan practicality - not a
-                  permanent ranking. Before paying, confirm a powered site for
-                  the exact six-berth length, check-in cutoff, dump facilities
-                  and cancellation terms.
-                </div>
-                <div class="camp-grid">
-                  <article class="camp-pick">
-                    <div class="camp-rank">1</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Primary Milford fit</div>
-                      <h5>Te Anau Lakeview Holiday Park</h5>
+                  <div class="timeline-row">
+                    <div class="timeline-time">11:15</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Continue to Glenorchy</b>
                       <p>
-                        Lakefront powered sites and a straightforward early exit
-                        toward Milford Road.
+                        Enjoy the Lake Wakatipu road rather than treating it as
+                        a transfer.
                       </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Bob%27s+Cove%2C+New+Zealand&amp;destination=Glenorchy%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">2</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Central town option</div>
-                      <h5>Te Anau TOP 10 Holiday Park</h5>
-                      <p>
-                        Useful for groceries, fuel and cruise logistics; verify
-                        early-departure access.
-                      </p>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">12:00</div>
+                    <div class="timeline-marker"><span>FOO</span></div>
+                    <div class="timeline-content">
+                      <b>Glenorchy lunch</b>
+                      <p>Keep the meal relaxed but protect the return drive.</p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://teanautop10.co.nz/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">3</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Facilities backup</div>
-                      <h5>Tasman Holiday Parks - Te Anau</h5>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">13:00</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Glenorchy Lagoon + Glenorchy town</b>
                       <p>
-                        Full holiday-park facilities and powered sites close to
+                        Allow 90-120 minutes for the lagoon, waterfront and
                         town.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">15:15</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Return to Queenstown</b>
+                      <p>
+                        Google baseline about 1 hour; campervan plan about 1h10.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Glenorchy%2C+New+Zealand&amp;destination=Queenstown%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">16:30</div>
+                    <div class="timeline-marker"><span>FLEX</span></div>
+                    <div class="timeline-content">
+                      <b>Queenstown free window</b>
+                      <p>
+                        Use for Gardens, lakefront, souvenirs, Skyline backup or
+                        simply rest.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">18:30</div>
+                    <div class="timeline-marker"><span>STY</span></div>
+                    <div class="timeline-content">
+                      <b>Queenstown campsite</b>
+                      <p>Prepare for the early Moke Lake departure.</p>
+                    </div>
+                  </div>
                 </div>
-              </details>
-            </div>
-          </article>
-          <article
-            class="day-card region-south"
-            data-day-label="13 Apr - Milford Sound primary day"
-            id="day-15"
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      Complete any remaining Te Anau / Milford food purchase in
+                      Queenstown if practical.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      This day protects the skydive against weather and gives
+                      Glenorchy proper time. Do not fill it with another major
+                      activity.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Use the same Queenstown base</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Curated for route fit and campervan practicality - not a
+                    permanent ranking. Before paying, confirm a powered site for
+                    the exact six-berth length, check-in cutoff, dump facilities
+                    and cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary premium option</div>
+                        <h5>Driftaway Queenstown</h5>
+                        <p>
+                          Modern lakefront-style facilities near Frankton; good
+                          for airport-side skydiving logistics.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://www.driftawayqueenstown.co.nz/accomodations/camping-motorhomes-and-caravaning"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Best Arthur's Point option</div>
+                        <h5>Queenstown TOP 10 Holiday Park</h5>
+                        <p>
+                          Powered sites and shuttle access; compare travel time
+                          to the skydiving check-in point.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://www.qtowntop10.co.nz/campervan-caravan-camping-sites/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Best walk-to-town option</div>
+                        <h5>Queenstown Lakeview Holiday Park</h5>
+                        <p>
+                          Central and convenient for Skyline and souvenirs;
+                          manoeuvring can be tighter for a large van.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://hampshireholidayparks.co.nz/park/queenstown-lakeview-holiday-park/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article>
+            <article
+              class="day-card region-south"
+              data-day-label="12 Apr - Moke Lake morning light - Te Anau"
+              id="day-14"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 15</small><strong>12 Apr</strong
+                  ><span>Monday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Queenstown</span><i></i
+                    ><span>Night: Te Anau</span>
+                  </div>
+                  <h3>Moke Lake morning light - Te Anau</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b><span>Te Anau campsite</span
+                ><span>No Moke ticket; written campervan road approval</span>
+              </div>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>🌅</i><b>Moke Lake</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🚐</i><b>Te Anau</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"
+                  ><i>🛒</i><b>Milford supplies</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>⛺️</i><b>Te Anau</b></span>
+              </div>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>05:10</b></div>
+                  <div>
+                    <small>Breakfast</small
+                    ><b>Snack 05:25; full breakfast 08:30</b>
+                  </div>
+                  <div><small>Start</small><b>05:40 departure</b></div>
+                </div>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:10</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake</b>
+                      <p>
+                        Proceed only with good weather, safe road conditions and
+                        completed skydive.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:40</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Drive to Moke Lake</b>
+                      <p>
+                        The access includes steep, winding road and about 8 km
+                        of gravel. Written rental approval is required.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Moke+Lake%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">06:25</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Moke Lake morning light</b>
+                      <p>
+                        Moke Lake is now part of the plan, not labelled
+                        optional. Default to the official lakeshore / marked
+                        route. The social-media upper spur is unmarked and
+                        should not be used in darkness, rain, ice or poor
+                        visibility.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">08:30</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Full breakfast</b>
+                      <p>Return to Queenstown / Frankton area.</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">10:00</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Drive to Te Anau</b>
+                      <p>
+                        Google baseline about 2h15; campervan plan about 2h35.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Te+Anau%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">12:40</div>
+                    <div class="timeline-marker"><span>STY</span></div>
+                    <div class="timeline-content">
+                      <b>Te Anau campsite and lunch</b>
+                      <p>
+                        Glenorchy is covered on the 11 April flex day; do not
+                        add it to this transfer.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">14:30</div>
+                    <div class="timeline-marker"><span>SHOP</span></div>
+                    <div class="timeline-content">
+                      <b>Major Milford supply run</b>
+                      <p>
+                        Fuel, breakfast, packed lunch, water and wet-weather
+                        layers.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">18:00</div>
+                    <div class="timeline-marker"><span>RST</span></div>
+                    <div class="timeline-content">
+                      <b>Early dinner and sleep</b>
+                      <p>Prepare for the Milford departure.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      Te Anau fuel, food, water and weather gear for Milford
+                      Road.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      Safety precedence: road approval and conditions can cancel
+                      Moke Lake. Glenorchy stays on 11 April and is not
+                      reinserted here.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Top 3 practical options in Te Anau</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Curated for route fit and campervan practicality - not a
+                    permanent ranking. Before paying, confirm a powered site for
+                    the exact six-berth length, check-in cutoff, dump facilities
+                    and cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary Milford fit</div>
+                        <h5>Te Anau Lakeview Holiday Park</h5>
+                        <p>
+                          Lakefront powered sites and a straightforward early
+                          exit toward Milford Road.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Central town option</div>
+                        <h5>Te Anau TOP 10 Holiday Park</h5>
+                        <p>
+                          Useful for groceries, fuel and cruise logistics;
+                          verify early-departure access.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanautop10.co.nz/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Facilities backup</div>
+                        <h5>Tasman Holiday Parks - Te Anau</h5>
+                        <p>
+                          Full holiday-park facilities and powered sites close
+                          to town.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article>
+            <article
+              class="day-card region-south"
+              data-day-label="13 Apr - Milford Sound primary day"
+              id="day-15"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 16</small><strong>13 Apr</strong
+                  ><span>Tuesday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Te Anau</span><i></i
+                    ><span>Night: Te Anau</span>
+                  </div>
+                  <h3>Milford Sound primary day</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b
+                ><span>Milford cruise / coach + cruise</span
+                ><span>Second Te Anau campsite night</span>
+              </div>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>🛣️</i><b>Milford Road</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🪞</i><b>Mirror Lakes</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🚢</i><b>Milford cruise</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>↩️</i><b>Te Anau</b></span>
+              </div>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>05:30</b></div>
+                  <div><small>Breakfast</small><b>05:45-06:20</b></div>
+                  <div><small>Start</small><b>06:30 departure</b></div>
+                </div>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:30</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake</b>
+                      <p>
+                        Check SH94, avalanche / road status and operator
+                        messages.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:45</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Breakfast</b>
+                      <p>Finish by 06:20.</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">06:30</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Milford Road</b>
+                      <p>
+                        The 120 km road takes about two hours without stops;
+                        allow about 3h30 outward with Eglinton Valley, Mirror
+                        Lakes and safe photo stops.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Te+Anau%2C+New+Zealand&amp;destination=Milford+Sound%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">Cruise anchor</div>
+                    <div class="timeline-marker"><span>MUST</span></div>
+                    <div class="timeline-content">
+                      <b>Milford Sound cruise</b>
+                      <p>
+                        Use the confirmed cruise check-in time. Do not add
+                        kayaking unless it is part of the booked product and
+                        return timing remains safe.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">After cruise</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Return to Te Anau</b>
+                      <p>
+                        Allow about 2h20-3h depending on stops and road
+                        conditions.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">17:30 est.</div>
+                    <div class="timeline-marker"><span>STY</span></div>
+                    <div class="timeline-content">
+                      <b>Te Anau campsite and rest</b>
+                      <p>Long-day recovery only.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      No supply run. Carry all food, water, warm and waterproof
+                      layers from Te Anau.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      Contingency: if Milford is disrupted, 14 April becomes the
+                      backup. Cathedral Caves is then the first major activity
+                      removed; Mt Cook and Christchurch remain protected.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Top 3 practical options in Te Anau</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Curated for route fit and campervan practicality - not a
+                    permanent ranking. Before paying, confirm a powered site for
+                    the exact six-berth length, check-in cutoff, dump facilities
+                    and cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary Milford fit</div>
+                        <h5>Te Anau Lakeview Holiday Park</h5>
+                        <p>
+                          Lakefront powered sites and a straightforward early
+                          exit toward Milford Road.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Central town option</div>
+                        <h5>Te Anau TOP 10 Holiday Park</h5>
+                        <p>
+                          Useful for groceries, fuel and cruise logistics;
+                          verify early-departure access.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanautop10.co.nz/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Facilities backup</div>
+                        <h5>Tasman Holiday Parks - Te Anau</h5>
+                        <p>
+                          Full holiday-park facilities and powered sites close
+                          to town.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article></template
           >
-            <header class="day-header">
-              <div class="date-block">
-                <small>Road day 16</small><strong>13 Apr</strong
-                ><span>Tuesday</span>
+          <template id="fiordland-days-doubtful-template"
+            ><article
+              class="day-card region-south"
+              data-day-label="11 Apr - Moke Lake - Glenorchy - Te Anau"
+              id="queenstown-flex"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 14</small><strong>11 Apr</strong
+                  ><span>Sunday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Queenstown</span><i></i
+                    ><span>Night: Te Anau</span>
+                  </div>
+                  <h3>Moke Lake morning light - Glenorchy - Te Anau</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b><span>Skydive reschedule status</span
+                ><span>Written Moke Lake campervan approval</span
+                ><span>Te Anau campsite - 3 vans / 3 nights</span>
               </div>
-              <div class="day-heading">
-                <div class="location-line">
-                  <span>Start: Te Anau</span><i></i><span>Night: Te Anau</span>
-                </div>
-                <h3>Milford Sound primary day</h3>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>🌅</i><b>Moke Lake</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>📷</i><b>Bob's Cove</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>🏔️</i><b>Glenorchy</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>🚐</i><b>Te Anau</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>⛺️</i><b>3-night base</b></span>
               </div>
-            </header>
-            <div class="booking-strip">
-              <b>Book / confirm:</b><span>Milford cruise / coach + cruise</span
-              ><span>Second Te Anau campsite night</span>
-            </div>
-            <div aria-label="Visual day flow" class="day-journey">
-              <span class="journey-stop"><i>🛣️</i><b>Milford Road</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🪞</i><b>Mirror Lakes</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>🚢</i><b>Milford cruise</b></span
-              ><span class="journey-arrow">&gt;</span
-              ><span class="journey-stop"><i>↩️</i><b>Te Anau</b></span>
-            </div>
-            <div class="day-body">
-              <div class="morning-grid">
-                <div><small>Wake</small><b>05:30</b></div>
-                <div><small>Breakfast</small><b>05:45-06:20</b></div>
-                <div><small>Start</small><b>06:30 departure</b></div>
-              </div>
-              <div class="timeline">
-                <div class="timeline-row">
-                  <div class="timeline-time">05:30</div>
-                  <div class="timeline-marker"><span>WAK</span></div>
-                  <div class="timeline-content">
-                    <b>Wake</b>
-                    <p>
-                      Check SH94, avalanche / road status and operator messages.
-                    </p>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>05:10</b></div>
+                  <div>
+                    <small>Breakfast</small
+                    ><b>Snack 05:25; packed breakfast 07:45</b>
+                  </div>
+                  <div>
+                    <small>Start</small><b>05:40 conditional departure</b>
                   </div>
                 </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">05:45</div>
-                  <div class="timeline-marker"><span>BRK</span></div>
-                  <div class="timeline-content">
-                    <b>Breakfast</b>
-                    <p>Finish by 06:20.</p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">06:30</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Milford Road</b>
-                    <p>
-                      The 120 km road takes about two hours without stops; allow
-                      about 3h30 outward with Eglinton Valley, Mirror Lakes and
-                      safe photo stops.
-                    </p>
-                    <a
-                      class="maps-link"
-                      href="https://www.google.com/maps/dir/?api=1&amp;origin=Te+Anau%2C+New+Zealand&amp;destination=Milford+Sound%2C+New+Zealand&amp;travelmode=driving"
-                      rel="noopener"
-                      target="_blank"
-                      >Open route</a
-                    >
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">Cruise anchor</div>
-                  <div class="timeline-marker"><span>MUST</span></div>
-                  <div class="timeline-content">
-                    <b>Milford Sound cruise</b>
-                    <p>
-                      Use the confirmed cruise check-in time. Do not add
-                      kayaking unless it is part of the booked product and
-                      return timing remains safe.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">After cruise</div>
-                  <div class="timeline-marker"><span>DRV</span></div>
-                  <div class="timeline-content">
-                    <b>Return to Te Anau</b>
-                    <p>
-                      Allow about 2h20-3h depending on stops and road
-                      conditions.
-                    </p>
-                  </div>
-                </div>
-                <div class="timeline-row">
-                  <div class="timeline-time">17:30 est.</div>
-                  <div class="timeline-marker"><span>STY</span></div>
-                  <div class="timeline-content">
-                    <b>Te Anau campsite and rest</b>
-                    <p>Long-day recovery only.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="day-foot-grid">
-                <div class="supply-box">
-                  <small>Supply run</small>
-                  <p>
-                    No supply run. Carry all food, water, warm and waterproof
-                    layers from Te Anau.
-                  </p>
-                </div>
-                <div class="decision-box">
-                  <small>Operating note</small>
-                  <p>
-                    Contingency: if Milford is disrupted, 14 April becomes the
-                    backup. Cathedral Caves is then the first major activity
-                    removed; Mt Cook and Christchurch remain protected.
-                  </p>
-                </div>
-              </div>
-              <details class="camp-details">
-                <summary>
-                  <span>Camping shortlist</span
-                  ><b>Top 3 practical options in Te Anau</b>
-                </summary>
-                <div class="camp-warning">
-                  Curated for route fit and campervan practicality - not a
-                  permanent ranking. Before paying, confirm a powered site for
-                  the exact six-berth length, check-in cutoff, dump facilities
-                  and cancellation terms.
-                </div>
-                <div class="camp-grid">
-                  <article class="camp-pick">
-                    <div class="camp-rank">1</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Primary Milford fit</div>
-                      <h5>Te Anau Lakeview Holiday Park</h5>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:10</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake and check conditions</b>
                       <p>
-                        Lakefront powered sites and a straightforward early exit
-                        toward Milford Road.
+                        Use the Moke Lake plan only with safe weather, road
+                        approval and a completed 10 April skydive.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">2</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Central town option</div>
-                      <h5>Te Anau TOP 10 Holiday Park</h5>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:40</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Drive to Moke Lake</b>
                       <p>
-                        Useful for groceries, fuel and cruise logistics; verify
-                        early-departure access.
+                        The approach is steep, winding and partly gravel. Use
+                        the official lakeshore / marked route; do not force the
+                        unmarked upper spur in darkness or poor conditions.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Moke+Lake%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">06:25</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Moke Lake morning light</b>
+                      <p>
+                        Allow roughly 75-90 minutes including the safe lakeshore
+                        experience and photos.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://teanautop10.co.nz/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
-                  <article class="camp-pick">
-                    <div class="camp-rank">3</div>
-                    <div class="camp-copy">
-                      <div class="camp-fit">Facilities backup</div>
-                      <h5>Tasman Holiday Parks - Te Anau</h5>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">07:45</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Packed breakfast after sunrise</b>
                       <p>
-                        Full holiday-park facilities and powered sites close to
+                        Eat at the lake or at a safe roadside stop; do not
+                        return to Queenstown just for breakfast.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">08:20</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Continue directly toward Bob's Cove</b>
+                      <p>
+                        Bob's Cove remains the first scenic stop removed when
+                        the day runs late.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Moke+Lake%2C+New+Zealand&amp;destination=Bob%27s+Cove%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">09:10 est.</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Bob's Cove - time permitting</b>
+                      <p>
+                        Allow about 45-60 minutes. Skip it if the skydive
+                        backup, road conditions or fatigue compress the day.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">10:20 est.</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Continue to Glenorchy</b>
+                      <p>
+                        Enjoy the Lake Wakatipu road and keep a short photo
+                        allowance.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Bob%27s+Cove%2C+New+Zealand&amp;destination=Glenorchy%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">11:15 est.</div>
+                    <div class="timeline-marker"><span>FOO</span></div>
+                    <div class="timeline-content">
+                      <b>Glenorchy lunch</b>
+                      <p>
+                        Keep the meal efficient so the Te Anau arrival stays
+                        comfortable.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">12:00</div>
+                    <div class="timeline-marker"><span>ACT</span></div>
+                    <div class="timeline-content">
+                      <b>Glenorchy Lagoon + town</b>
+                      <p>
+                        Allow about 75-90 minutes for the lagoon, waterfront and
                         town.
                       </p>
                     </div>
-                    <a
-                      class="camp-go"
-                      href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
-                      rel="noopener"
-                      target="_blank"
-                      >Check site</a
-                    >
-                  </article>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">13:40 target</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Depart Glenorchy for Te Anau</b>
+                      <p>
+                        Travel back through Queenstown / Frankton. Use only a
+                        short fuel and grocery stop; aim to leave the Queenstown
+                        area no later than 15:30.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Glenorchy%2C+New+Zealand&amp;destination=Te+Anau%2C+New+Zealand&amp;waypoints=Queenstown%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">18:00 est.</div>
+                    <div class="timeline-marker"><span>STY</span></div>
+                    <div class="timeline-content">
+                      <b>Te Anau campsite, dinner and settle</b>
+                      <p>
+                        Check the confirmed Doubtful Sound pickup details and
+                        prepare breakfast, layers and day bags. No evening
+                        sightseeing.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </details>
-            </div>
-          </article>
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      Complete Doubtful + Milford food, water and fuel in
+                      Queenstown / Frankton before the Te Anau drive; use Te
+                      Anau only for a quick top-up.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      The skydive reschedule is the first priority. Bob's Cove
+                      is the first cut. Do not let Moke Lake or Glenorchy delay
+                      the Te Anau arrival or the 12 April booking.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Te Anau base - night 1 of 3</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Book space for all 3 Indie Campers vans, ideally on one
+                    reservation and for all three nights. Confirm powered-site
+                    dimensions, late-arrival access, dump facilities and
+                    cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary Fiordland fit</div>
+                        <h5>Te Anau Lakeview Holiday Park</h5>
+                        <p>
+                          Lakefront powered sites with practical access for Te
+                          Anau pickup and an early Milford Road departure.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Central town option</div>
+                        <h5>Te Anau TOP 10 Holiday Park</h5>
+                        <p>
+                          Useful for groceries, fuel and cruise logistics;
+                          confirm pickup access and any late-return
+                          arrangements.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanautop10.co.nz/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Facilities backup</div>
+                        <h5>Tasman Holiday Parks - Te Anau</h5>
+                        <p>
+                          Full holiday-park facilities close to town; a
+                          comfortable base for consecutive Fiordland days.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article>
+            <article
+              class="day-card region-south"
+              data-day-label="12 Apr - Doubtful Sound full-day cruise"
+              id="day-14"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 15</small><strong>12 Apr</strong
+                  ><span>Monday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Te Anau</span><i></i
+                    ><span>Night: Te Anau</span>
+                  </div>
+                  <h3>Doubtful Sound full-day wilderness cruise</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b
+                ><span>Doubtful Sound + Te Anau pickup</span
+                ><span>Exact pickup and return time</span
+                ><span>Same Te Anau campsite - night 2 of 3</span>
+              </div>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>🚌</i><b>Te Anau pickup</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>⛵</i><b>Lake Manapouri</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>🏔️</i><b>Wilmot Pass</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>🚢</i><b>Doubtful Sound</b></span
+                ><span class="journey-arrow">&gt;</span>
+                <span class="journey-stop"><i>↩️</i><b>Te Anau</b></span>
+              </div>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>Pickup - 1h45</b></div>
+                  <div>
+                    <small>Breakfast</small><b>Complete 1h before pickup</b>
+                  </div>
+                  <div><small>Start</small><b>At pickup 30m early</b></div>
+                </div>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">T-1h45</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake</b>
+                      <p>
+                        Use the confirmed Klook / operator pickup time; do not
+                        invent a fixed start before the booking is issued.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">T-1h30</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Breakfast and day-bag check</b>
+                      <p>
+                        Carry warm waterproof layers, water, camera gear and any
+                        food not included in the selected package.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">T-0h30</div>
+                    <div class="timeline-marker"><span>CHK</span></div>
+                    <div class="timeline-content">
+                      <b>Reach the confirmed Te Anau pickup point</b>
+                      <p>
+                        Keep all six travellers together and verify the return
+                        pickup instructions before boarding.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">Booked</div>
+                    <div class="timeline-marker"><span>BUS</span></div>
+                    <div class="timeline-content">
+                      <b>Te Anau transfer to Manapouri</b>
+                      <p>
+                        The exact coach departure, meeting point and connection
+                        sequence must follow the final booking voucher.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">Full day</div>
+                    <div class="timeline-marker"><span>CRU</span></div>
+                    <div class="timeline-content">
+                      <b>Lake Manapouri + Wilmot Pass + Doubtful Sound</b>
+                      <p>
+                        Treat this as the only major activity today: Lake
+                        Manapouri cruise, Wilmot Pass coach and the Doubtful
+                        Sound wilderness cruise, followed by the return journey.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">Return TBD</div>
+                    <div class="timeline-marker"><span>RST</span></div>
+                    <div class="timeline-content">
+                      <b>Return to Te Anau</b>
+                      <p>
+                        Dinner, charge devices, refuel only if needed and
+                        prepare the Milford day bags. No additional Te Anau
+                        activity.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      No planned shopping. Carry packed snacks and water;
+                      confirm whether lunch is included or must be pre-ordered.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      Doubtful Sound is fixed on 12 April. If the operator
+                      cancels, do not move it into 13 or 14 April; use the day
+                      for Te Anau rest, supplies and Milford preparation.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Same Te Anau base - night 2 of 3</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Book space for all 3 Indie Campers vans, ideally on one
+                    reservation and for all three nights. Confirm powered-site
+                    dimensions, late-arrival access, dump facilities and
+                    cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary Fiordland fit</div>
+                        <h5>Te Anau Lakeview Holiday Park</h5>
+                        <p>
+                          Lakefront powered sites with practical access for Te
+                          Anau pickup and an early Milford Road departure.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Central town option</div>
+                        <h5>Te Anau TOP 10 Holiday Park</h5>
+                        <p>
+                          Useful for groceries, fuel and cruise logistics;
+                          confirm pickup access and any late-return
+                          arrangements.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanautop10.co.nz/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Facilities backup</div>
+                        <h5>Tasman Holiday Parks - Te Anau</h5>
+                        <p>
+                          Full holiday-park facilities close to town; a
+                          comfortable base for consecutive Fiordland days.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article>
+            <article
+              class="day-card region-south"
+              data-day-label="13 Apr - Milford Sound primary day"
+              id="day-15"
+            >
+              <header class="day-header">
+                <div class="date-block">
+                  <small>Road day 16</small><strong>13 Apr</strong
+                  ><span>Tuesday</span>
+                </div>
+                <div class="day-heading">
+                  <div class="location-line">
+                    <span>Start: Te Anau</span><i></i
+                    ><span>Night: Te Anau</span>
+                  </div>
+                  <h3>Milford Sound primary day</h3>
+                </div>
+              </header>
+              <div class="booking-strip">
+                <b>Book / confirm:</b
+                ><span>Milford cruise / coach + cruise</span
+                ><span>Same Te Anau base - night 3 of 3</span>
+              </div>
+              <div aria-label="Visual day flow" class="day-journey">
+                <span class="journey-stop"><i>🛣️</i><b>Milford Road</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🪞</i><b>Mirror Lakes</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>🚢</i><b>Milford cruise</b></span
+                ><span class="journey-arrow">&gt;</span
+                ><span class="journey-stop"><i>↩️</i><b>Te Anau</b></span>
+              </div>
+              <div class="day-body">
+                <div class="morning-grid">
+                  <div><small>Wake</small><b>05:30</b></div>
+                  <div><small>Breakfast</small><b>05:45-06:20</b></div>
+                  <div><small>Start</small><b>06:30 departure</b></div>
+                </div>
+                <div class="timeline">
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:30</div>
+                    <div class="timeline-marker"><span>WAK</span></div>
+                    <div class="timeline-content">
+                      <b>Wake</b>
+                      <p>
+                        Check SH94, avalanche / road status and operator
+                        messages.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">05:45</div>
+                    <div class="timeline-marker"><span>BRK</span></div>
+                    <div class="timeline-content">
+                      <b>Breakfast</b>
+                      <p>Finish by 06:20.</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">06:30</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Milford Road</b>
+                      <p>
+                        The 120 km road takes about two hours without stops;
+                        allow about 3h30 outward with Eglinton Valley, Mirror
+                        Lakes and safe photo stops.
+                      </p>
+                      <a
+                        class="maps-link"
+                        href="https://www.google.com/maps/dir/?api=1&amp;origin=Te+Anau%2C+New+Zealand&amp;destination=Milford+Sound%2C+New+Zealand&amp;travelmode=driving"
+                        rel="noopener"
+                        target="_blank"
+                        >Open route</a
+                      >
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">Cruise anchor</div>
+                    <div class="timeline-marker"><span>MUST</span></div>
+                    <div class="timeline-content">
+                      <b>Milford Sound cruise</b>
+                      <p>
+                        Use the confirmed cruise check-in time. Do not add
+                        kayaking unless it is part of the booked product and
+                        return timing remains safe.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">After cruise</div>
+                    <div class="timeline-marker"><span>DRV</span></div>
+                    <div class="timeline-content">
+                      <b>Return to Te Anau</b>
+                      <p>
+                        Allow about 2h20-3h depending on stops and road
+                        conditions.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-time">17:30 est.</div>
+                    <div class="timeline-marker"><span>STY</span></div>
+                    <div class="timeline-content">
+                      <b>Te Anau campsite and rest</b>
+                      <p>Long-day recovery only.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="day-foot-grid">
+                  <div class="supply-box">
+                    <small>Supply run</small>
+                    <p>
+                      No supply run. Carry all food, water, warm and waterproof
+                      layers from Te Anau.
+                    </p>
+                  </div>
+                  <div class="decision-box">
+                    <small>Operating note</small>
+                    <p>
+                      Contingency: if Milford is disrupted, 14 April becomes the
+                      backup. Cathedral Caves is then the first major activity
+                      removed; Mt Cook and Christchurch remain protected.
+                    </p>
+                  </div>
+                </div>
+                <details class="camp-details">
+                  <summary>
+                    <span>Camping shortlist</span
+                    ><b>Same Te Anau base - night 3 of 3</b>
+                  </summary>
+                  <div class="camp-warning">
+                    Keep all 3 campervans on the same Te Anau booking for 11-13
+                    April. Confirm powered-site dimensions, early-departure
+                    access, dump facilities and cancellation terms.
+                  </div>
+                  <div class="camp-grid">
+                    <article class="camp-pick">
+                      <div class="camp-rank">1</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Primary Fiordland fit</div>
+                        <h5>Te Anau Lakeview Holiday Park</h5>
+                        <p>
+                          Lakefront powered sites with practical access for Te
+                          Anau pickup and an early Milford Road departure.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanauholidaypark.co.nz/rooms/poweredsite/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">2</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Central town option</div>
+                        <h5>Te Anau TOP 10 Holiday Park</h5>
+                        <p>
+                          Useful for groceries, fuel and cruise logistics;
+                          confirm pickup access and any late-return
+                          arrangements.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://teanautop10.co.nz/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                    <article class="camp-pick">
+                      <div class="camp-rank">3</div>
+                      <div class="camp-copy">
+                        <div class="camp-fit">Facilities backup</div>
+                        <h5>Tasman Holiday Parks - Te Anau</h5>
+                        <p>
+                          Full holiday-park facilities close to town; a
+                          comfortable base for consecutive Fiordland days.
+                        </p>
+                      </div>
+                      <a
+                        class="camp-go"
+                        href="https://tasmanholidayparks.com/south-island/southland/te-anau/"
+                        rel="noopener"
+                        target="_blank"
+                        >Check site</a
+                      >
+                    </article>
+                  </div>
+                </details>
+              </div>
+            </article></template
+          >
           <article
             class="day-card region-south"
             data-day-label="14 Apr - Te Anau - Cathedral Caves - Catlins"
@@ -10533,8 +11464,9 @@
           <article class="info-card">
             <h4>Recheck 24 hours / same day</h4>
             <p>
-              DOC alerts, SH94, skydiving weather, Cathedral Caves window,
-              glacier access and alpine conditions.
+              DOC alerts, SH94, skydiving weather, Doubtful pickup / return
+              details, Cathedral Caves window, glacier access and alpine
+              conditions.
             </p>
           </article>
         </div>
@@ -10629,6 +11561,20 @@
             rel="noopener"
             target="_blank"
             >Singapore Airlines</a
+          ><a
+            data-doubtful-only="true"
+            hidden
+            href="https://www.realnz.com/en/experiences/day-cruises/doubtful-sound-wilderness-cruises/"
+            rel="noopener"
+            target="_blank"
+            >RealNZ - Doubtful Sound Wilderness Cruise</a
+          ><a
+            data-doubtful-only="true"
+            hidden
+            href="https://www.klook.com/en-NZ/activity/21863-doubtful-sound-cruise-tour-queenstown/"
+            rel="noopener"
+            target="_blank"
+            >Klook - Doubtful Sound with transfer options</a
           >
         </div>
         <p>
@@ -10639,6 +11585,105 @@
         </p>
       </section>
     </main>
+
+    <script id="itinerary-variant-manager">
+      (function () {
+        const key = "nz-trip-include-doubtful-sound";
+        const toggle = document.getElementById("doubtfulSoundToggle");
+        const status = document.getElementById("variantStatus");
+        const summary = document.getElementById("variantPlanSummary");
+        const bookingCount = document.getElementById("bookingDecisionCount");
+        const routeSlot = document.getElementById("master-route-content");
+        const daysSlot = document.getElementById("fiordland-variant-days");
+        const campSlot = document.getElementById("te-anau-camp-content");
+        if (!toggle || !routeSlot || !daysSlot || !campSlot) return;
+
+        function cloneTemplate(id, slot) {
+          const template = document.getElementById(id);
+          if (!template) return;
+          slot.replaceChildren(template.content.cloneNode(true));
+        }
+        function save(value) {
+          try {
+            localStorage.setItem(key, value ? "1" : "0");
+          } catch (e) {}
+        }
+        function load() {
+          try {
+            return localStorage.getItem(key) === "1";
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function apply(includeDoubtful, saveChoice) {
+          toggle.checked = includeDoubtful;
+          toggle.setAttribute(
+            "aria-checked",
+            includeDoubtful ? "true" : "false",
+          );
+          cloneTemplate(
+            includeDoubtful
+              ? "master-route-doubtful-template"
+              : "master-route-original-template",
+            routeSlot,
+          );
+          cloneTemplate(
+            includeDoubtful
+              ? "fiordland-days-doubtful-template"
+              : "fiordland-days-original-template",
+            daysSlot,
+          );
+          cloneTemplate(
+            includeDoubtful
+              ? "te-anau-camp-doubtful-template"
+              : "te-anau-camp-original-template",
+            campSlot,
+          );
+
+          document.querySelectorAll("[data-doubtful-only]").forEach((el) => {
+            el.hidden = !includeDoubtful;
+          });
+          document.querySelectorAll("[data-variant-copy]").forEach((el) => {
+            el.hidden =
+              el.dataset.variantCopy !==
+              (includeDoubtful ? "doubtful" : "original");
+          });
+
+          if (status) {
+            status.textContent = includeDoubtful
+              ? "Doubtful Sound included"
+              : "Original plan active";
+            status.classList.toggle("included", includeDoubtful);
+          }
+          if (summary) {
+            summary.textContent = includeDoubtful
+              ? "Doubtful version: Moke Lake + Glenorchy to Te Anau on 11 Apr, full-day Doubtful Sound on 12 Apr, Milford on 13 Apr."
+              : "Original plan: Queenstown / Glenorchy flex on 11 Apr, Moke Lake to Te Anau on 12 Apr, Milford on 13 Apr.";
+          }
+          if (bookingCount)
+            bookingCount.textContent = includeDoubtful
+              ? "15 booking decisions"
+              : "14 booking decisions";
+          document.documentElement.dataset.doubtfulSound = includeDoubtful
+            ? "included"
+            : "excluded";
+          if (saveChoice) save(includeDoubtful);
+          if (typeof updateProgress === "function") updateProgress();
+          if (typeof openAccordionForHash === "function")
+            openAccordionForHash(location.hash);
+          document.dispatchEvent(
+            new CustomEvent("itineraryvariantchange", {
+              detail: { includeDoubtful },
+            }),
+          );
+        }
+
+        window.applyDoubtfulSoundVariant = apply;
+        apply(load(), false);
+        toggle.addEventListener("change", () => apply(toggle.checked, true));
+      })();
+    </script>
     <script>
       const safeStorage = {
         get(k) {
@@ -10687,6 +11732,7 @@
       function updateProgress() {
         const tracked = new Map();
         document.querySelectorAll(".booking-check,.task-check").forEach((x) => {
+          if (x.closest("[data-doubtful-only][hidden]")) return;
           if (!tracked.has(x.dataset.store)) tracked.set(x.dataset.store, x);
         });
         const boxes = [...tracked.values()];
@@ -10749,21 +11795,6 @@
         { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.1, 0.3] },
       );
       dayEls.forEach((d) => observer.observe(d));
-
-      const campSearch = document.getElementById("campSearch");
-      if (campSearch)
-        campSearch.addEventListener("input", () => {
-          const q = campSearch.value.trim().toLowerCase();
-          document
-            .querySelectorAll(".camp-area")
-            .forEach(
-              (x) =>
-                (x.hidden =
-                  q &&
-                  !x.dataset.campArea.includes(q) &&
-                  !x.textContent.toLowerCase().includes(q)),
-            );
-        });
 
       function openChecklist() {
         document.getElementById("checklistPanel")?.classList.add("open");
@@ -10838,35 +11869,9 @@
         var list = document.getElementById("route-rail-list");
         var toggle = document.getElementById("route-rail-toggle");
         if (!master || !rail || !list || !toggle) return;
-        list.innerHTML = "";
-        master.querySelectorAll(".node[href]").forEach(function (node) {
-          var a = document.createElement("a");
-          var href = node.getAttribute("href");
-          var icon = (node.querySelector(".dot") || {}).textContent || "o";
-          var label =
-            (node.querySelector(".label") || {}).textContent ||
-            node.title ||
-            "Route stop";
-          a.className =
-            "route-rail-item" +
-            (node.classList.contains("n") ? " n" : "") +
-            (node.classList.contains("s") ? " s" : "") +
-            (node.classList.contains("ferry") ? " ferry" : "") +
-            (node.classList.contains("flight") ? " flight" : "");
-          a.href = href;
-          a.title = label.trim();
-          a.setAttribute("aria-label", label.trim());
-          var meta = (node.getAttribute("title") || "").trim();
-          a.innerHTML =
-            '<span class="rail-icon">' +
-            icon.trim() +
-            '</span><span class="rail-text"><span class="rail-name">' +
-            label.trim() +
-            '</span><span class="rail-meta">' +
-            meta +
-            "</span></span>";
-          list.appendChild(a);
-        });
+        var observer = null;
+        var items = [];
+
         function setExpanded(open) {
           rail.classList.toggle("expanded", open);
           toggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -10875,20 +11880,10 @@
             open ? "Unpin master route" : "Pin master route open",
           );
         }
-        toggle.addEventListener("click", function () {
-          setExpanded(!rail.classList.contains("expanded"));
-        });
         function updateVisibility() {
           var rect = master.getBoundingClientRect();
           rail.classList.toggle("visible", rect.bottom < 72);
         }
-        window.addEventListener("scroll", updateVisibility, { passive: true });
-        window.addEventListener("resize", updateVisibility, { passive: true });
-        updateVisibility();
-        var items = [].slice.call(list.querySelectorAll(".route-rail-item"));
-        var days = [].slice.call(
-          document.querySelectorAll("article.day-card[id]"),
-        );
         function activate(id) {
           var active = null;
           items.forEach(function (item) {
@@ -10904,32 +11899,81 @@
             list.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
           }
         }
-        if ("IntersectionObserver" in window) {
-          var observer = new IntersectionObserver(
-            function (entries) {
-              var visible = entries
-                .filter(function (e) {
-                  return e.isIntersecting;
-                })
-                .sort(function (a, b) {
-                  return a.boundingClientRect.top - b.boundingClientRect.top;
-                });
-              if (visible.length) activate(visible[0].target.id);
-            },
-            { root: null, rootMargin: "-16% 0px -68% 0px", threshold: 0 },
+        function rebuild() {
+          if (observer) {
+            observer.disconnect();
+            observer = null;
+          }
+          list.innerHTML = "";
+          master.querySelectorAll(".node[href]").forEach(function (node) {
+            var a = document.createElement("a");
+            var href = node.getAttribute("href");
+            var icon = (node.querySelector(".dot") || {}).textContent || "o";
+            var label =
+              (node.querySelector(".label") || {}).textContent ||
+              node.title ||
+              "Route stop";
+            a.className =
+              "route-rail-item" +
+              (node.classList.contains("n") ? " n" : "") +
+              (node.classList.contains("s") ? " s" : "") +
+              (node.classList.contains("ferry") ? " ferry" : "") +
+              (node.classList.contains("flight") ? " flight" : "");
+            a.href = href;
+            a.title = label.trim();
+            a.setAttribute("aria-label", label.trim());
+            var meta = (node.getAttribute("title") || "").trim();
+            a.innerHTML =
+              '<span class="rail-icon">' +
+              icon.trim() +
+              '</span><span class="rail-text"><span class="rail-name">' +
+              label.trim() +
+              '</span><span class="rail-meta">' +
+              meta +
+              "</span></span>";
+            a.addEventListener("click", function () {
+              if (window.innerWidth <= 860) setExpanded(false);
+            });
+            list.appendChild(a);
+          });
+          items = [].slice.call(list.querySelectorAll(".route-rail-item"));
+          var days = [].slice.call(
+            document.querySelectorAll("article.day-card[id]"),
           );
-          days.forEach(function (day) {
-            observer.observe(day);
-          });
+          if ("IntersectionObserver" in window) {
+            observer = new IntersectionObserver(
+              function (entries) {
+                var visible = entries
+                  .filter(function (e) {
+                    return e.isIntersecting;
+                  })
+                  .sort(function (a, b) {
+                    return a.boundingClientRect.top - b.boundingClientRect.top;
+                  });
+                if (visible.length) activate(visible[0].target.id);
+              },
+              { root: null, rootMargin: "-16% 0px -68% 0px", threshold: 0 },
+            );
+            days.forEach(function (day) {
+              observer.observe(day);
+            });
+          }
+          updateVisibility();
         }
-        items.forEach(function (item) {
-          item.addEventListener("click", function () {
-            if (window.innerWidth <= 860) setExpanded(false);
-          });
+
+        toggle.addEventListener("click", function () {
+          setExpanded(!rail.classList.contains("expanded"));
         });
+        window.addEventListener("scroll", updateVisibility, { passive: true });
+        window.addEventListener("resize", updateVisibility, { passive: true });
         document.addEventListener("keydown", function (e) {
           if (e.key === "Escape") setExpanded(false);
         });
+        document.addEventListener("itineraryvariantchange", function () {
+          requestAnimationFrame(rebuild);
+        });
+        window.rebuildStickyRoute = rebuild;
+        rebuild();
       })();
     </script>
   </body>
