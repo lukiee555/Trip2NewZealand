@@ -1,10 +1,11 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="color-scheme" content="light" />
-    <title>New Zealand Roadmap 2027 — Cars North, Campervans South</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content="light" name="color-scheme" />
+    <title>New Zealand Roadmap 2027 — Confirmed Trip Plan</title>
     <style>
       :root {
         --ink: #172630;
@@ -1895,60 +1896,779 @@
         }
       }
     </style>
+    <style id="countdown-hikes-confirmed-styles">
+      html {
+        scroll-padding-top: 76px;
+      }
+      .hero {
+        padding: 34px 36px;
+      }
+      .hero-layout {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 34px;
+        align-items: center;
+      }
+      .hero-copy {
+        min-width: 0;
+      }
+      .hero-copy h1 {
+        max-width: 820px;
+      }
+      .hero-copy p {
+        max-width: 820px;
+      }
+      .departure-calendar {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 360px;
+        padding: 24px 16px 12px;
+      }
+      .calendar-frame {
+        position: relative;
+        width: 238px;
+        height: 230px;
+        border-radius: 42px;
+        background: linear-gradient(145deg, #dda17d, #9f6144 74%, #7b442f);
+        padding: 18px 18px 22px;
+        box-shadow:
+          0 24px 50px rgba(0, 0, 0, 0.3),
+          inset 0 2px 1px rgba(255, 255, 255, 0.42);
+      }
+      .calendar-frame:before {
+        content: "";
+        position: absolute;
+        inset: 12px 13px 16px;
+        border-radius: 31px;
+        background: #f1f1ef;
+        box-shadow:
+          inset 0 -8px 18px rgba(83, 50, 36, 0.12),
+          0 5px 10px rgba(56, 30, 20, 0.22);
+      }
+      .calendar-page {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #24323a;
+      }
+      .calendar-page:after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        width: 61px;
+        height: 61px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0) 48%,
+          #b8b9ba 49%,
+          #f5f5f3 73%
+        );
+        border-bottom-right-radius: 25px;
+        filter: drop-shadow(-5px -4px 6px rgba(0, 0, 0, 0.17));
+      }
+      .calendar-rings {
+        position: absolute;
+        top: 6px;
+        z-index: 5;
+        display: flex;
+        gap: 60px;
+      }
+      .calendar-ring {
+        width: 20px;
+        height: 58px;
+        border-radius: 12px;
+        background: linear-gradient(
+          90deg,
+          #43627c,
+          #c9d5de 42%,
+          #557993 70%,
+          #21394f
+        );
+        box-shadow: 0 4px 7px rgba(0, 0, 0, 0.42);
+        position: relative;
+      }
+      .calendar-ring:after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        height: 14px;
+        border-radius: 0 0 9px 9px;
+        background: linear-gradient(#d8a3b0, #9a203e);
+      }
+      .calendar-kicker {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #555;
+        margin-top: 12px;
+      }
+      .calendar-number {
+        font-size: 76px;
+        line-height: 0.92;
+        letter-spacing: -0.06em;
+        color: #d61745;
+        font-weight: 950;
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+      }
+      .calendar-unit {
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        color: #666;
+        margin-top: 8px;
+      }
+      .calendar-date {
+        margin-top: 18px;
+        text-align: center;
+        color: #e7f0f1;
+        font-size: 12px;
+        font-weight: 850;
+      }
+      .calendar-booked {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 12px;
+      }
+      .calendar-booked span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 9.5px;
+        font-weight: 900;
+        color: #fff;
+      }
+      .calendar-booked i {
+        font-style: normal;
+        color: #79d7ad;
+      }
+      .countdown-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 2000;
+        background: rgba(17, 36, 46, 0.96);
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(12px);
+        transform: translateY(-115%);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.26s ease,
+          opacity 0.22s ease;
+      }
+      .countdown-bar.visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .countdown-inner {
+        max-width: 1260px;
+        margin: auto;
+        min-height: 64px;
+        padding: 7px 86px 7px 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+      .countdown-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 220px;
+      }
+      .countdown-brand-icon {
+        width: 39px;
+        height: 39px;
+        border-radius: 13px;
+        background: linear-gradient(145deg, #dda17d, #8d5036);
+        display: grid;
+        place-items: center;
+        font-size: 19px;
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45);
+      }
+      .countdown-brand b {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .countdown-brand small {
+        display: block;
+        color: #aebfc5;
+        font-size: 9.5px;
+        margin-top: 2px;
+      }
+      .countdown-digits {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-variant-numeric: tabular-nums;
+      }
+      .countdown-segment {
+        min-width: 60px;
+        padding: 5px 7px;
+        border-radius: 10px;
+        background: #243e49;
+        border: 1px solid #365563;
+        text-align: center;
+      }
+      .countdown-segment strong {
+        display: block;
+        font-size: 18px;
+        line-height: 1.05;
+        letter-spacing: 0.03em;
+      }
+      .countdown-segment small {
+        display: block;
+        font-size: 7.5px;
+        color: #aebfc5;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 2px;
+      }
+      .countdown-colon {
+        color: #d4a84b;
+        font-weight: 900;
+      }
+      .countdown-status {
+        display: none;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+      }
+      .countdown-target {
+        font-size: 10px;
+        color: #c6d4d8;
+        text-align: right;
+        white-space: nowrap;
+      }
+      .countdown-bar.trip-live .countdown-digits,
+      .countdown-bar.trip-complete .countdown-digits {
+        display: none;
+      }
+      .countdown-bar.trip-live .countdown-status,
+      .countdown-bar.trip-complete .countdown-status {
+        display: block;
+      }
+      .booking-status-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 0 0 22px;
+      }
+      .booking-status-card {
+        position: relative;
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid #cfe1d7;
+        background: linear-gradient(145deg, #f6fbf8, #e8f3ed);
+        border-radius: 15px;
+        padding: 12px;
+      }
+      .booking-status-card .check {
+        width: 31px;
+        height: 31px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #1d7a5d;
+        color: #fff;
+        font-weight: 950;
+      }
+      .booking-status-card b {
+        display: block;
+        font-size: 12px;
+      }
+      .booking-status-card small {
+        display: block;
+        color: #3f6d5e;
+        font-size: 9.5px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 2px;
+      }
+      .confirmed-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: #dff3e9;
+        color: #17654e;
+        border: 1px solid #b8ddcc;
+        font-size: 8.5px;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .flight-card {
+        padding-top: 46px;
+      }
+      .info-card {
+        position: relative;
+      }
+      .info-card.has-status {
+        padding-top: 44px;
+      }
+      .booked-inline {
+        display: inline-flex;
+        margin-top: 7px;
+        padding: 4px 7px;
+        border-radius: 999px;
+        background: #e1f2e9;
+        color: #17654e;
+        border: 1px solid #c2e2d3;
+        font-size: 8.5px;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .hike-decision {
+        margin: 0 0 14px;
+        padding: 12px 14px;
+        border: 1px solid #e1c87d;
+        background: #fff7df;
+        border-radius: 14px;
+        font-size: 11.5px;
+        color: #5b4b22;
+      }
+      .hike-decision strong {
+        color: #32270f;
+      }
+      .hike-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 0 0 16px;
+      }
+      .hike-option {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fbfcfa;
+        padding: 15px;
+        min-height: 208px;
+      }
+      .hike-option.must-do {
+        background: linear-gradient(145deg, #fffaf0, #f5e4b8);
+        border-color: #d9b75c;
+        box-shadow: 0 7px 20px rgba(151, 107, 25, 0.1);
+      }
+      .hike-badge {
+        display: inline-flex;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: #eef2ef;
+        color: #4d6069;
+        font-size: 8px;
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .hike-option.must-do .hike-badge {
+        background: #172933;
+        color: #fff;
+      }
+      .hike-option h4 {
+        font-size: 16px;
+        margin: 9px 0 5px;
+      }
+      .hike-option > p {
+        font-size: 10.5px;
+        color: var(--muted);
+        margin: 0 0 11px;
+      }
+      .hike-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+      .hike-stat {
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid #dfe5e1;
+        padding: 7px;
+      }
+      .hike-stat b {
+        display: block;
+        font-size: 10.5px;
+      }
+      .hike-stat span {
+        display: block;
+        font-size: 8.5px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+      .hike-access {
+        font-size: 9.5px;
+        color: #4e5f68;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px dashed #ccd5cf;
+      }
+      .hike-window-note {
+        margin-top: 9px;
+        padding: 10px;
+        border-radius: 11px;
+        background: #edf3ef;
+        color: #4b5d65;
+        font-size: 10.5px;
+      }
+      @media (max-width: 980px) {
+        .hero-layout {
+          grid-template-columns: 1fr 260px;
+          gap: 18px;
+        }
+        .departure-calendar {
+          min-height: 315px;
+        }
+        .calendar-frame {
+          width: 210px;
+          height: 205px;
+        }
+        .calendar-number {
+          font-size: 66px;
+        }
+        .booking-status-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hike-options {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 760px) {
+        html {
+          scroll-padding-top: 58px;
+        }
+        .hero {
+          padding: 26px 18px;
+        }
+        .hero-layout {
+          grid-template-columns: 1fr;
+        }
+        .departure-calendar {
+          min-height: 0;
+          padding-top: 24px;
+        }
+        .calendar-frame {
+          width: 206px;
+          height: 200px;
+        }
+        .calendar-rings {
+          gap: 51px;
+        }
+        .calendar-number {
+          font-size: 64px;
+        }
+        .calendar-date {
+          margin-top: 14px;
+        }
+        .countdown-inner {
+          min-height: 55px;
+          padding: 5px 12px;
+          gap: 8px;
+        }
+        .countdown-brand {
+          min-width: 0;
+        }
+        .countdown-brand-icon {
+          width: 34px;
+          height: 34px;
+        }
+        .countdown-brand b {
+          font-size: 10px;
+        }
+        .countdown-brand small,
+        .countdown-target {
+          display: none;
+        }
+        .countdown-segment {
+          min-width: 42px;
+          padding: 5px 3px;
+        }
+        .countdown-segment strong {
+          font-size: 15px;
+        }
+        .countdown-segment small {
+          font-size: 6.5px;
+        }
+        .countdown-digits {
+          gap: 3px;
+        }
+        .countdown-colon {
+          font-size: 10px;
+        }
+        .countdown-status {
+          font-size: 11px;
+          text-align: right;
+        }
+        .booking-status-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .confirmed-badge {
+          top: 10px;
+          right: 10px;
+        }
+        .hike-option {
+          min-height: 0;
+        }
+      }
+      @media (max-width: 450px) {
+        .calendar-booked {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          width: 100%;
+        }
+        .calendar-booked span {
+          justify-content: center;
+        }
+        .booking-status-grid {
+          grid-template-columns: 1fr;
+        }
+        .countdown-brand-icon {
+          display: none;
+        }
+        .countdown-segment {
+          min-width: 39px;
+        }
+        .countdown-inner {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+        .countdown-brand b {
+          font-size: 9px;
+        }
+        .countdown-status {
+          font-size: 10px;
+        }
+      }
+      @media print {
+        .countdown-bar {
+          display: none !important;
+        }
+        .hero-layout {
+          grid-template-columns: 1fr !important;
+        }
+        .departure-calendar {
+          margin-top: 18mm;
+          min-height: auto !important;
+        }
+        .calendar-frame {
+          width: 190px !important;
+          height: 185px !important;
+        }
+        .calendar-number {
+          font-size: 58px !important;
+        }
+        .calendar-date {
+          color: #fff !important;
+        }
+        .calendar-booked {
+          display: flex !important;
+        }
+        .booking-status-grid {
+          grid-template-columns: repeat(4, 1fr) !important;
+        }
+        .hike-options {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .hike-option {
+          min-height: 180px !important;
+          break-inside: avoid;
+        }
+        .confirmed-badge,
+        .booked-inline {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+    <style id="mobile-hero-countdown-order">
+      @media (max-width: 760px) {
+        .hero-layout {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-copy {
+          display: contents;
+        }
+        .hero .eyebrow {
+          order: 1;
+        }
+        .hero h1 {
+          order: 2;
+        }
+        .hero p {
+          order: 3;
+        }
+        .departure-calendar {
+          order: 4;
+        }
+        .hero-stats {
+          order: 5;
+        }
+        .hero-actions {
+          order: 6;
+        }
+        .departure-calendar {
+          padding: 18px 0 6px;
+        }
+        .calendar-frame {
+          width: 190px;
+          height: 184px;
+        }
+        .calendar-rings {
+          gap: 45px;
+        }
+        .calendar-ring {
+          height: 52px;
+        }
+        .calendar-number {
+          font-size: 59px;
+        }
+        .calendar-kicker {
+          font-size: 17px;
+        }
+        .calendar-unit {
+          font-size: 15px;
+        }
+        .calendar-date {
+          font-size: 10.5px;
+        }
+      }
+    </style>
   </head>
   <body id="top">
-    <aside class="left-rail screen-only" aria-label="Trip checklist">
+    <div
+      aria-live="polite"
+      class="countdown-bar screen-only"
+      id="tripCountdownBar"
+    >
+      <div class="countdown-inner">
+        <div class="countdown-brand">
+          <span class="countdown-brand-icon">✈️</span
+          ><span
+            ><b>New Zealand 2027</b
+            ><small>Departure · 27 Mar · 17:20 IST</small></span
+          >
+        </div>
+        <div
+          aria-label="Time until departure"
+          class="countdown-digits"
+          id="countdownDigits"
+        >
+          <span class="countdown-segment"
+            ><strong id="cdDays">000</strong><small>Days</small></span
+          ><span class="countdown-colon">:</span>
+          <span class="countdown-segment"
+            ><strong id="cdHours">00</strong><small>Hours</small></span
+          ><span class="countdown-colon">:</span>
+          <span class="countdown-segment"
+            ><strong id="cdMinutes">00</strong><small>Minutes</small></span
+          ><span class="countdown-colon">:</span>
+          <span class="countdown-segment"
+            ><strong id="cdSeconds">00</strong><small>Seconds</small></span
+          >
+        </div>
+        <div class="countdown-status" id="countdownStatus">
+          Adventure underway
+        </div>
+        <div class="countdown-target">
+          Bengaluru departure<br /><strong>27 March 2027 · 17:20 IST</strong>
+        </div>
+      </div>
+    </div>
+    <aside aria-label="Trip checklist" class="left-rail screen-only">
       <div class="rail-title" id="checklistPin">
         <span class="rail-icon">✓</span><b>To-do and shopping</b>
       </div>
       <div class="checklist">
         <label class="task-row"
           ><input
+            checked="checked"
             class="persist task-check"
             data-store="task-flights"
             type="checkbox"
           /><span class="fake-check"></span
           ><em
-            >Save all flight tickets, baggage allowances and seat assignments
-            offline</em
+            >Save all confirmed flight tickets, baggage allowances and seat
+            assignments offline</em
           ></label
         ><label class="task-row"
           ><input
+            checked="checked"
             class="persist task-check"
             data-store="task-cars"
             type="checkbox"
           /><span class="fake-check"></span
           ><em
-            >Confirm 3 Auckland medium SUVs, landing-night pickup and 1 April
-            return procedure</em
+            >Save the confirmed 3-SUV vouchers and landing-night pickup
+            instructions offline</em
           ></label
         ><label class="task-row"
           ><input
+            checked="checked"
             class="persist task-check"
             data-store="task-vans"
             type="checkbox"
           /><span class="fake-check"></span
           ><em
-            >Confirm 3 Christchurch campervans, all drivers, insurance, deposits
-            and dimensions</em
+            >Save the confirmed 3-campervan vouchers, insurance, deposits and
+            return details offline</em
           ></label
         ><label class="task-row"
           ><input
+            checked="checked"
             class="persist task-check"
             data-store="task-stays"
             type="checkbox"
           /><span class="fake-check"></span
           ><em
-            >Book Auckland, Rotorua and Taupō stays with the required parking
-            and room setup</em
+            >Save all booked North Island stay addresses and check-in
+            instructions offline</em
           ></label
         ><label class="task-row"
           ><input
+            checked="checked"
             class="persist task-check"
             data-store="task-camps"
             type="checkbox"
           /><span class="fake-check"></span
-          ><em>Book all South Island campsites for three campervans</em></label
+          ><em
+            >Save all booked South Island overnight confirmations and
+            late-arrival instructions offline</em
+          ></label
         ><label class="task-row"
           ><input
             class="persist task-check"
@@ -1966,7 +2686,8 @@
             type="checkbox"
           /><span class="fake-check"></span
           ><em
-            >Book the Rob Roy trailhead shuttle for all six travellers</em
+            >If Rob Roy is chosen, confirm a trailhead shuttle for all six
+            travellers</em
           ></label
         ><label class="task-row"
           ><input
@@ -2076,7 +2797,10 @@
             data-store="task-poles"
             type="checkbox"
           /><span class="fake-check"></span
-          ><em>Trekking poles for Isthmus Peak and steep tracks</em></label
+          ><em
+            >Trekking poles for Roys Peak, Isthmus Peak and other steep
+            tracks</em
+          ></label
         ><label class="task-row"
           ><input
             class="persist task-check"
@@ -2112,12 +2836,12 @@
       </div>
     </aside>
     <nav
+      aria-label="Sticky master route"
       class="route-rail screen-only"
       id="routeRail"
-      aria-label="Sticky master route"
     >
       <div class="route-rail-head">
-        <button id="routePin" type="button" aria-expanded="false">
+        <button aria-expanded="false" id="routePin" type="button">
           <span class="head-icon">🗺️</span
           ><span class="head-text">Pin route open</span></button
         ><a href="#overview"
@@ -2125,7 +2849,7 @@
           ><span class="head-text">Overview</span></a
         ><a href="#bookings"
           ><span class="head-icon">📅</span
-          ><span class="head-text">Bookings & stays</span></a
+          ><span class="head-text">Bookings &amp; stays</span></a
         ><a href="#master-route"
           ><span class="head-icon">↗</span
           ><span class="head-text">Master route</span></a
@@ -2137,7 +2861,7 @@
       >
     </nav>
     <div class="mobile-tools screen-only">
-      <button type="button" onclick="openChecklist()">Checklist</button
+      <button onclick="openChecklist()" type="button">Checklist</button
       ><a href="#master-route">Route</a><a href="#daily-roadmap">Days</a
       ><a href="#top">Top</a>
     </div>
@@ -2149,57 +2873,63 @@
       <div class="checklist-drawer">
         <div class="checklist-drawer-head">
           <h3>To-do and shopping</h3>
-          <button type="button" onclick="closeChecklist()">Close</button>
+          <button onclick="closeChecklist()" type="button">Close</button>
         </div>
         <div class="checklist">
           <label class="task-row"
             ><input
+              checked="checked"
               class="persist task-check"
               data-store="task-flights"
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Save all flight tickets, baggage allowances and seat assignments
-              offline</em
+              >Save all confirmed flight tickets, baggage allowances and seat
+              assignments offline</em
             ></label
           ><label class="task-row"
             ><input
+              checked="checked"
               class="persist task-check"
               data-store="task-cars"
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Confirm 3 Auckland medium SUVs, landing-night pickup and 1 April
-              return procedure</em
+              >Save the confirmed 3-SUV vouchers and landing-night pickup
+              instructions offline</em
             ></label
           ><label class="task-row"
             ><input
+              checked="checked"
               class="persist task-check"
               data-store="task-vans"
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Confirm 3 Christchurch campervans, all drivers, insurance,
-              deposits and dimensions</em
+              >Save the confirmed 3-campervan vouchers, insurance, deposits and
+              return details offline</em
             ></label
           ><label class="task-row"
             ><input
+              checked="checked"
               class="persist task-check"
               data-store="task-stays"
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Book Auckland, Rotorua and Taupō stays with the required parking
-              and room setup</em
+              >Save all booked North Island stay addresses and check-in
+              instructions offline</em
             ></label
           ><label class="task-row"
             ><input
+              checked="checked"
               class="persist task-check"
               data-store="task-camps"
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Book all South Island campsites for three campervans</em
+              >Save all booked South Island overnight confirmations and
+              late-arrival instructions offline</em
             ></label
           ><label class="task-row"
             ><input
@@ -2218,7 +2948,8 @@
               type="checkbox"
             /><span class="fake-check"></span
             ><em
-              >Book the Rob Roy trailhead shuttle for all six travellers</em
+              >If Rob Roy is chosen, confirm a trailhead shuttle for all six
+              travellers</em
             ></label
           ><label class="task-row"
             ><input
@@ -2329,7 +3060,10 @@
               data-store="task-poles"
               type="checkbox"
             /><span class="fake-check"></span
-            ><em>Trekking poles for Isthmus Peak and steep tracks</em></label
+            ><em
+              >Trekking poles for Roys Peak, Isthmus Peak and other steep
+              tracks</em
+            ></label
           ><label class="task-row"
             ><input
               class="persist task-check"
@@ -2369,30 +3103,55 @@
     </div>
     <main class="page">
       <section class="hero" id="overview">
-        <div class="eyebrow">New Zealand · 6 adults / 3 couples</div>
-        <h1>Roadmap 2027<br />Planning Hub</h1>
-        <p>
-          Three medium SUVs across the North Island, an Auckland–Christchurch
-          flight, then three campervans around the South Island from Lake Tekapo
-          to the West Coast and Arthur’s Pass.
-        </p>
-        <div class="hero-stats">
-          <span class="hero-stat">28 Mar – 18 Apr 2027</span
-          ><span class="hero-stat">22 calendar days</span
-          ><span class="hero-stat">3 medium SUVs · North Island</span
-          ><span class="hero-stat">3 campervans · South Island</span>
-        </div>
-        <div class="hero-actions screen-only">
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="window.print()"
-          >
-            Print / save PDF</button
-          ><a class="btn btn-secondary" href="#bookings">Bookings & stays</a
-          ><a class="btn btn-secondary" href="#daily-roadmap"
-            >Day-by-day itinerary</a
-          >
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow">New Zealand · 6 adults / 3 couples</div>
+            <h1>Roadmap 2027<br />Planning Hub</h1>
+            <p>
+              Three medium SUVs across the North Island, an
+              Auckland–Christchurch flight, then three campervans around the
+              South Island from Lake Tekapo to the West Coast and Arthur’s Pass.
+            </p>
+            <div class="hero-stats">
+              <span class="hero-stat">Depart 27 Mar 2027 · 17:20 IST</span
+              ><span class="hero-stat">Auckland 28 Mar · Home 18 Apr</span
+              ><span class="hero-stat">3 medium SUVs · North Island</span
+              ><span class="hero-stat">3 campervans · South Island</span>
+            </div>
+            <div class="hero-actions screen-only">
+              <button
+                class="btn btn-primary"
+                onclick="window.print()"
+                type="button"
+              >
+                Print / save PDF</button
+              ><a class="btn btn-secondary" href="#bookings"
+                >Bookings &amp; stays</a
+              ><a class="btn btn-secondary" href="#daily-roadmap"
+                >Day-by-day itinerary</a
+              >
+            </div>
+          </div>
+          <div aria-live="polite" class="departure-calendar">
+            <div class="calendar-rings">
+              <span class="calendar-ring"></span
+              ><span class="calendar-ring"></span>
+            </div>
+            <div class="calendar-frame">
+              <div class="calendar-page">
+                <span class="calendar-kicker" id="calendarKicker">IN</span
+                ><strong class="calendar-number" id="calendarDays">193</strong
+                ><span class="calendar-unit" id="calendarUnit">DAYS</span>
+              </div>
+            </div>
+            <div class="calendar-date">
+              Until departure · 27 March 2027 · 17:20 IST
+            </div>
+            <div class="calendar-booked">
+              <span><i>✓</i> Flights</span><span><i>✓</i> SUVs</span
+              ><span><i>✓</i> Campervans</span><span><i>✓</i> Stays</span>
+            </div>
+          </div>
         </div>
       </section>
       <section class="quick-index screen-only">
@@ -2407,7 +3166,7 @@
         </div>
         <div class="index-grid">
           <a class="index-card" href="#bookings"
-            ><b>Bookings & overnight plan</b
+            ><b>Bookings &amp; overnight plan</b
             ><span
               >Flights, transport, North Island stays, South Island camps and
               activities</span
@@ -2440,29 +3199,56 @@
             </div>
           </summary>
           <div class="section-body">
+            <div
+              aria-label="Confirmed core bookings"
+              class="booking-status-grid"
+            >
+              <div class="booking-status-card">
+                <span class="check">✓</span
+                ><span><b>3 flights</b><small>Confirmed</small></span>
+              </div>
+              <div class="booking-status-card">
+                <span class="check">✓</span
+                ><span><b>3 medium SUVs</b><small>Booked</small></span>
+              </div>
+              <div class="booking-status-card">
+                <span class="check">✓</span
+                ><span><b>3 campervans</b><small>Booked</small></span>
+              </div>
+              <div class="booking-status-card">
+                <span class="check">✓</span
+                ><span><b>All stays</b><small>Booked</small></span>
+              </div>
+            </div>
             <div class="subhead">
               <div>
                 <h3>Flights</h3>
                 <p>
-                  Only the confirmed planning details are displayed; there are
-                  no editable fields.
+                  All three flight bookings are confirmed; the cards show the
+                  useful travel timings only.
                 </p>
               </div>
             </div>
             <div class="flight-grid">
               <article class="flight-card">
+                <span class="confirmed-badge">✓ Confirmed</span>
                 <div class="flight-icon">✈️</div>
                 <small>27–28 Mar 2027 · Inbound long-haul</small>
                 <h4>Bengaluru (BLR) → Singapore (SIN) → Auckland (AKL)</h4>
-                <p>Arrive Auckland at 17:50 on 28 March</p>
+                <p>
+                  Depart Bengaluru at 17:20 on 27 March · arrive Auckland at
+                  17:50 on 28 March
+                </p>
               </article>
               <article class="flight-card">
+                <span class="confirmed-badge">✓ Confirmed</span>
                 <div class="flight-icon">🛫</div>
                 <small>2 Apr 2027 · Domestic transfer</small>
                 <h4>Auckland (AKL) → Christchurch (CHC)</h4>
-                <p>Depart 08:50 · planned arrival about 10:15 · direct</p>
+                <p>Depart 08:50 · arrive about 10:15 · direct</p>
               </article>
               <article class="flight-card">
+                <span class="confirmed-badge">✓ Confirmed</span>
                 <div class="flight-icon">🛬</div>
                 <small>18 Apr 2027 · Return long-haul</small>
                 <h4>Christchurch (CHC) → Singapore (SIN) → Bengaluru (BLR)</h4>
@@ -2479,43 +3265,44 @@
               </div>
             </div>
             <div class="info-grid">
-              <article class="info-card">
+              <article class="info-card has-status">
+                <span class="confirmed-badge">✓ Booked</span>
                 <div class="icon">🚙</div>
                 <h4>Three medium SUVs — North Island</h4>
                 <p>
-                  Collect at Auckland Airport after the 17:50 arrival on 28
-                  March and return at Auckland Airport on 1 April evening. Use
-                  three primary renters and attach the inbound flight number to
-                  every reservation.
+                  Booking complete. Collect at Auckland Airport after the 17:50
+                  arrival on 28 March and return at Auckland Airport on 1 April
+                  evening. Keep the three rental vouchers and landing-night
+                  pickup instructions offline.
                 </p>
               </article>
-              <article class="info-card">
+              <article class="info-card has-status">
+                <span class="confirmed-badge">✓ Booked</span>
                 <div class="icon">🚐</div>
                 <h4>Three campervans — South Island</h4>
                 <p>
-                  Collect near Christchurch Airport on 2 April after the
-                  domestic flight and return on 17 April. Two adults per
-                  vehicle; process the three handovers in parallel.
+                  Booking complete. Collect near Christchurch Airport on 2 April
+                  after the domestic flight and return on 17 April. Two adults
+                  per vehicle; process the three handovers in parallel.
                 </p>
               </article>
               <article class="info-card">
                 <div class="icon">🛣️</div>
                 <h4>Road-access controls</h4>
                 <p>
-                  Rob Roy uses a commercial shuttle. Moke Lake, Crown Range and
-                  any gravel access require written permission in the signed
-                  rental agreement. Availability of a campsite does not itself
-                  grant road permission.
+                  If Rob Roy is selected, use the commercial shuttle. Moke Lake,
+                  Crown Range and any gravel access still require written
+                  permission in the signed rental agreement; a campsite booking
+                  does not itself grant road permission.
                 </p>
               </article>
             </div>
             <div class="subhead">
               <div>
-                <h3>North Island kitchen stays</h3>
+                <h3>Booked North Island kitchen stays</h3>
                 <p>
-                  Use one 3-bedroom / 3-bathroom property where practical, or
-                  three ensuite units at one property with proper kitchen
-                  access.
+                  The accommodation is booked; retain the practical room,
+                  kitchen, parking and check-in notes below.
                 </p>
               </div>
             </div>
@@ -2525,6 +3312,7 @@
                   <div>
                     <h4>Auckland Airport — 28 March</h4>
                     <div class="meta">28 March · Arrival hotel / apartment</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2593,6 +3381,7 @@
                   <div>
                     <h4>Rotorua — 29 and 30 March</h4>
                     <div class="meta">29–30 March · Two-night kitchen stay</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2663,6 +3452,7 @@
                   <div>
                     <h4>Taupō — 31 March</h4>
                     <div class="meta">31 March · One-night kitchen stay</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2731,6 +3521,7 @@
                   <div>
                     <h4>Auckland Airport — 1 April</h4>
                     <div class="meta">1 April · Pre-flight airport hotel</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2809,6 +3600,7 @@
                   <div>
                     <h4>Lake Tekapo — 2 April</h4>
                     <div class="meta">2 April · First campervan night</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2881,6 +3673,7 @@
                     <div class="meta">
                       3 April · Campervan campground shortlist
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -2972,6 +3765,7 @@
                     <div class="meta">
                       4 April · Campervan campground shortlist
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3038,6 +3832,7 @@
                   <div>
                     <h4>Te Anau — 5 and 6 April</h4>
                     <div class="meta">5–6 April · Two-night campervan base</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3098,6 +3893,7 @@
                   <div>
                     <h4>Queenstown — 7 and 8 April</h4>
                     <div class="meta">7–8 April · Two-night campervan base</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3164,6 +3960,7 @@
                   <div>
                     <h4>Moke Lake — 9 April</h4>
                     <div class="meta">9 April · DOC campsite</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3234,6 +4031,7 @@
                     <div class="meta">
                       10–12 April · Three-night campervan base
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3281,8 +4079,8 @@
                       <div>
                         <h5>The Camp - Lake Hawea</h5>
                         <p>
-                          Excellent lake setting, but adds driving before Rob
-                          Roy and Isthmus Peak starts.
+                          Excellent lake setting, but adds driving before the
+                          two Wānaka hiking days.
                         </p>
                       </div>
                       <a
@@ -3302,6 +4100,7 @@
                     <div class="meta">
                       13 April · Campervan campground shortlist
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3370,6 +4169,7 @@
                     <div class="meta">
                       14 April · Campervan campground shortlist
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3438,6 +4238,7 @@
                     <div class="meta">
                       15 April · West Coast campervan night
                     </div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3506,6 +4307,7 @@
                   <div>
                     <h4>Christchurch area — 16 April</h4>
                     <div class="meta">16 April · Final campervan night</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3576,6 +4378,7 @@
                   <div>
                     <h4>Christchurch Airport — 17 April</h4>
                     <div class="meta">17 April · Final airport hotel</div>
+                    <span class="booked-inline">✓ Booked</span>
                   </div>
                   <span class="open-icon"></span>
                 </summary>
@@ -3868,11 +4671,13 @@
                 <span class="priority book-first">Book first</span>
               </article>
               <article class="booking-item">
-                <div class="booking-date">11 Apr</div>
+                <div class="booking-date">11–12 Apr</div>
                 <div>
-                  <h4>Rob Roy trailhead shuttle</h4>
+                  <h4>Rob Roy trailhead shuttle — if selected</h4>
                   <p>
-                    Six travellers from Wānaka to Raspberry Creek and return.
+                    Use only when Rob Roy becomes the second Wānaka hike. Check
+                    availability before the Wānaka dates and favour flexible
+                    cancellation.
                   </p>
                   <a
                     href="https://yello.co.nz/tramping-shuttle-transport/"
@@ -3881,7 +4686,7 @@
                     >Operator / official page</a
                   >
                 </div>
-                <span class="priority book-first">Book first</span>
+                <span class="priority conditional">Conditional</span>
               </article>
               <article class="booking-item">
                 <div class="booking-date">17 Apr</div>
@@ -4085,7 +4890,7 @@
         </details>
       </section>
       <section class="section" id="master-route">
-        <details class="major-accordion" open>
+        <details class="major-accordion" open="">
           <summary>
             <div class="summary-copy">
               <div class="kicker">Journey overview</div>
@@ -4202,13 +5007,19 @@
                     ><div class="dot">🍂</div>
                     <div class="label">Arrowtown / Cardrona</div></a
                   ><span class="connector"></span
-                  ><a class="node s" href="#day-14" title="10–11 Apr"
+                  ><a
+                    class="node s"
+                    href="#day-14"
+                    title="11 Apr · hiking window 1"
                     ><div class="dot">🥾</div>
-                    <div class="label">Wānaka / Rob Roy</div></a
+                    <div class="label">Wānaka / Roys Peak</div></a
                   ><span class="connector"></span
-                  ><a class="node s" href="#day-15" title="12 Apr"
+                  ><a
+                    class="node s"
+                    href="#day-15"
+                    title="12 Apr · hiking window 2"
                     ><div class="dot">🏔️</div>
-                    <div class="label">Isthmus Peak</div></a
+                    <div class="label">Rob Roy / Isthmus choice</div></a
                   ><span class="connector"></span
                   ><a class="node s" href="#day-16" title="13 Apr"
                     ><div class="dot">💦</div>
@@ -4264,7 +5075,7 @@
         </details>
       </section>
       <section class="section" id="daily-roadmap">
-        <details class="major-accordion" open>
+        <details class="major-accordion" open="">
           <summary>
             <div class="summary-copy">
               <div class="kicker">Operational itinerary</div>
@@ -4282,8 +5093,8 @@
             <div class="days">
               <article
                 class="day-card region-north"
-                id="arrival"
                 data-day-label="28 Mar — Auckland arrival — collect three SUVs and recover"
+                id="arrival"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -4299,7 +5110,7 @@
                   </div>
                 </header>
                 <div class="booking-strip">
-                  <b>Book / confirm:</b><span>Inbound flight</span
+                  <b>Confirmed:</b><span>Inbound flight</span
                   ><span>3 medium SUVs</span><span>Auckland stay</span>
                 </div>
                 <div class="day-journey">
@@ -4398,8 +5209,8 @@
               </article>
               <article
                 class="day-card region-north"
-                id="day-1"
                 data-day-label="29 Mar — Waitomo first — Hobbiton — Rotorua"
+                id="day-1"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -4446,8 +5257,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Auckland+Airport%2C+New+Zealand&amp;destination=Waitomo+Glowworm+Caves%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4484,8 +5295,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Waitomo+Glowworm+Caves%2C+New+Zealand&amp;destination=Hobbiton+Movie+Set%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4515,8 +5326,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Hobbiton+Movie+Set%2C+New+Zealand&amp;destination=Rotorua%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4564,8 +5375,8 @@
               </article>
               <article
                 class="day-card region-north"
-                id="day-2"
                 data-day-label="30 Mar — Redwoods — Hell’s Gate — Blue Lake — Lake Tarawera"
+                id="day-2"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -4621,8 +5432,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Redwoods+Treewalk%2C+Rotorua%2C+New+Zealand&amp;destination=Hell%27s+Gate+Geothermal+Reserve%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4712,8 +5523,8 @@
               </article>
               <article
                 class="day-card region-north"
-                id="day-3"
                 data-day-label="31 Mar — Blue Spring — Wai-O-Tapu — Craters — Taupō"
+                id="day-3"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -4764,8 +5575,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Rotorua%2C+New+Zealand&amp;destination=Blue+Spring%2C+Putaruru%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4790,8 +5601,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Blue+Spring%2C+Putaruru%2C+New+Zealand&amp;destination=Wai-O-Tapu+Thermal+Wonderland%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4840,8 +5651,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Kerosene+Creek%2C+New+Zealand&amp;destination=Craters+of+the+Moon%2C+Taupo%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -4901,8 +5712,8 @@
               </article>
               <article
                 class="day-card region-north"
-                id="day-4"
                 data-day-label="1 Apr — Lake Taupō — Huka Falls — car return — airport hotel"
+                id="day-4"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5010,8 +5821,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Taupo%2C+New+Zealand&amp;destination=Auckland+Airport%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5072,8 +5883,8 @@
               </article>
               <article
                 class="day-card region-flight"
-                id="day-5"
                 data-day-label="2 Apr — 08:50 flight — three campervans — Lake Tekapo"
+                id="day-5"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5089,7 +5900,7 @@
                   </div>
                 </header>
                 <div class="booking-strip">
-                  <b>Book / confirm:</b><span>08:50 domestic flight</span
+                  <b>Confirmed / prepare:</b><span>08:50 domestic flight</span
                   ><span>3 campervans</span><span>Pre-ordered groceries</span
                   ><span>Lake Tekapo campground</span>
                 </div>
@@ -5173,8 +5984,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Christchurch+Airport%2C+New+Zealand&amp;destination=Lake+Tekapo%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5234,8 +6045,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-6"
                 data-day-label="3 Apr — Lake Pukaki — Hooker Valley — Tasman viewpoints"
+                id="day-6"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5299,8 +6110,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Lake+Tekapo%2C+New+Zealand&amp;destination=White+Horse+Hill+Campground%2C+New+Zealand&amp;travelmode=driving&amp;waypoints=Lake+Pukaki%2C+New+Zealand"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5403,8 +6214,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-7"
                 data-day-label="4 Apr — Mt Cook — Lindis Pass — Central Otago — Catlins"
+                id="day-7"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5466,8 +6277,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Aoraki+Mount+Cook+National+Park%2C+New+Zealand&amp;destination=Owaka%2C+New+Zealand&amp;travelmode=driving&amp;waypoints=Omarama%2C+New+Zealand%7CLindis+Pass%2C+New+Zealand%7CCromwell%2C+New+Zealand"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5547,8 +6358,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-8"
                 data-day-label="5 Apr — Cathedral Caves — selected Catlins stops — Te Anau"
+                id="day-8"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5649,8 +6460,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Cathedral+Caves%2C+New+Zealand&amp;destination=Te+Anau%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5707,8 +6518,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-9"
                 data-day-label="6 Apr — Milford Road short walks — Milford Sound cruise"
+                id="day-9"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5760,8 +6571,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Te+Anau%2C+New+Zealand&amp;destination=Milford+Sound%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5859,8 +6670,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-10"
                 data-day-label="7 Apr — Lake Henry — Queenstown arrival and recovery"
+                id="day-10"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -5915,8 +6726,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Te+Anau%2C+New+Zealand&amp;destination=Queenstown%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -5981,8 +6792,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-11"
                 data-day-label="8 Apr — Queenstown skydive — Skyline — lakefront"
+                id="day-11"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6095,8 +6906,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-12"
                 data-day-label="9 Apr — Glenorchy — Dart River Wilderness Jet — Moke Lake"
+                id="day-12"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6153,8 +6964,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Queenstown%2C+New+Zealand&amp;destination=Glenorchy%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6197,8 +7008,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Glenorchy%2C+New+Zealand&amp;destination=Moke+Lake+Campsite%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6246,8 +7057,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-13"
                 data-day-label="10 Apr — Moke Lake loop — Arrowtown — Cardrona — Wānaka"
+                id="day-13"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6308,8 +7119,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Moke+Lake%2C+New+Zealand&amp;destination=Arrowtown%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6356,8 +7167,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Cardrona%2C+New+Zealand&amp;destination=Wanaka%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6403,8 +7214,8 @@
               </article>
               <article
                 class="day-card region-south"
+                data-day-label="11 Apr — Wānaka hiking window 1 — Roys Peak priority"
                 id="day-14"
-                data-day-label="11 Apr — Rob Roy Glacier Track by approved shuttle"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6416,80 +7227,200 @@
                       <span>Start: Wānaka</span><i></i
                       ><span>Night: Wānaka</span>
                     </div>
-                    <h3>Rob Roy Glacier Track by approved shuttle</h3>
+                    <h3>Wānaka hiking window 1 — Roys Peak priority</h3>
                   </div>
                 </header>
                 <div class="booking-strip">
-                  <b>Book / confirm:</b><span>Rob Roy shuttle</span
-                  ><span>DOC access check</span>
+                  <b>Prepare / decide:</b
+                  ><span>Roys Peak weather and DOC check</span
+                  ><span>Rob Roy shuttle only if selected</span
+                  ><span>Isthmus recovery check</span>
                 </div>
                 <div class="day-journey">
-                  <span class="journey-stop"><i>🚌</i><b>Trail shuttle</b></span
-                  ><span class="journey-arrow">›</span
-                  ><span class="journey-stop"><i>🥾</i><b>Rob Roy</b></span
-                  ><span class="journey-arrow">›</span
-                  ><span class="journey-stop"
-                    ><i>🏔️</i><b>Glacier views</b></span
+                  <span class="journey-stop"
+                    ><i>⭐</i><b>Roys Peak must do</b></span
                   ><span class="journey-arrow">›</span
                   ><span class="journey-stop"
-                    ><i>🌳</i><b>Wānaka lakefront</b></span
+                    ><i>🧊</i><b>Rob Roy option</b></span
+                  ><span class="journey-arrow">›</span
+                  ><span class="journey-stop"
+                    ><i>🏔️</i><b>Isthmus option</b></span
+                  ><span class="journey-arrow">›</span
+                  ><span class="journey-stop"
+                    ><i>🌊</i><b>Wānaka recovery</b></span
                   >
                 </div>
                 <div class="day-body">
                   <div class="morning-grid">
-                    <div><small>Wake</small><b>06:30–06:45</b></div>
-                    <div><small>Breakfast</small><b>06:45–07:20</b></div>
                     <div>
-                      <small>Day anchor</small><b>Shuttle about 08:00</b>
+                      <small>Wake</small><b>Set after the forecast decision</b>
                     </div>
+                    <div>
+                      <small>Breakfast</small
+                      ><b>Packed for Roys / Isthmus; normal for Rob Roy</b>
+                    </div>
+                    <div>
+                      <small>Day anchor</small
+                      ><b>Put Roys on the clearest day</b>
+                    </div>
+                  </div>
+                  <div class="hike-decision">
+                    <strong>Two-day rule:</strong> Roys Peak is the must-do and
+                    goes on the clearest, lower-wind day. On the other day
+                    choose Rob Roy or Isthmus Peak using weather, access, leg
+                    recovery and group preference.
+                  </div>
+                  <div aria-label="Wānaka hike comparison" class="hike-options">
+                    <article class="hike-option must-do">
+                      <span class="hike-badge">Must do</span>
+                      <h4>Roys Peak</h4>
+                      <p>
+                        Iconic Lake Wānaka panorama and the trip’s priority
+                        summit hike.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>16 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>5–6 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Very hard</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>≈1,228 m</b><span>Elevation gain</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        Easy road access from Wānaka; parking can fill. Carry
+                        water, layers, food and poles for the descent.
+                      </div>
+                    </article>
+                    <article class="hike-option">
+                      <span class="hike-badge">Choose one</span>
+                      <h4>Rob Roy Glacier Track</h4>
+                      <p>
+                        Forest, river, swing bridge, waterfalls and
+                        hanging-glacier views.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>10 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>3–4 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Moderate</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Shuttle day</b><span>Access plan</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        Use a commercial Wānaka–Raspberry Creek shuttle if
+                        chosen; DOC access and creek conditions override the
+                        plan.
+                      </div>
+                    </article>
+                    <article class="hike-option">
+                      <span class="hike-badge">Choose one</span>
+                      <h4>Isthmus Peak</h4>
+                      <p>
+                        Long, exposed summit day with views across Lakes Wānaka
+                        and Hāwea.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>16 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>5–7 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Very hard</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>≈1,000 m</b><span>Elevation gain</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        No reliable water on track. Choose only when everyone
+                        has recovered well and the second summit forecast is
+                        strong.
+                      </div>
+                    </article>
                   </div>
                   <div class="timeline">
                     <div class="timeline-row">
-                      <div class="time">08:00</div>
-                      <div class="marker"><span>BUS</span></div>
+                      <div class="time">Previous evening</div>
+                      <div class="marker"><span>DEC</span></div>
                       <div class="event">
-                        <b>Depart Wānaka by trailhead shuttle</b>
+                        <b>Compare both-day forecasts</b>
                         <p>
-                          The shuttle avoids using the campervans on the gravel
-                          road and creek fords.
+                          Choose the Roys Peak day first. Then decide whether
+                          the second day should be Rob Roy or Isthmus.
                         </p>
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">09:15–13:30</div>
+                      <div class="time">Roys option</div>
                       <div class="marker"><span>MUST</span></div>
                       <div class="event">
-                        <b>Rob Roy Glacier Track</b>
+                        <b>Start Roys Peak around 07:00–07:30</b>
                         <p>
-                          Carry lunch, water, rain shell and warm layers. DOC
-                          alerts and creek conditions override the plan.
+                          Allow 5–6 hours plus parking, breaks and summit time.
+                          An earlier start is useful only when parking, heat or
+                          the forecast justifies it.
+                        </p>
+                        <a
+                          class="maps-link"
+                          href="https://www.google.com/maps/dir/?api=1&amp;origin=Wanaka%2C+New+Zealand&amp;destination=Roys+Peak+Track+Car+Park%2C+New+Zealand&amp;travelmode=driving"
+                          rel="noopener"
+                          target="_blank"
+                          >Open route</a
+                        >
+                      </div>
+                    </div>
+                    <div class="timeline-row">
+                      <div class="time">Rob Roy option</div>
+                      <div class="marker"><span>SHUT</span></div>
+                      <div class="event">
+                        <b>Use the confirmed shuttle schedule</b>
+                        <p>
+                          Allow the full transfer plus 3–4 hours walking. Do not
+                          take the campervans onto the gravel and ford approach.
                         </p>
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">13:30–14:15</div>
-                      <div class="marker"><span>FOO</span></div>
+                      <div class="time">Isthmus option</div>
+                      <div class="marker"><span>HIK</span></div>
                       <div class="event">
-                        <b>Trailhead lunch and recovery</b>
-                        <p>Do not rush directly into the return transfer.</p>
+                        <b>Start around 08:00 when conditions are stable</b>
+                        <p>
+                          Allow 5–7 hours and carry all water. Use it only when
+                          everyone is ready for a second major climb.
+                        </p>
+                        <a
+                          class="maps-link"
+                          href="https://www.google.com/maps/dir/?api=1&amp;origin=Wanaka%2C+New+Zealand&amp;destination=Isthmus+Peak+Track+Car+Park%2C+New+Zealand&amp;travelmode=driving"
+                          rel="noopener"
+                          target="_blank"
+                          >Open route</a
+                        >
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">14:15–16:00</div>
-                      <div class="marker"><span>BUS</span></div>
-                      <div class="event">
-                        <b>Return to Wānaka</b>
-                        <p>Use the booked shuttle schedule.</p>
-                      </div>
-                    </div>
-                    <div class="timeline-row">
-                      <div class="time">16:00 onward</div>
+                      <div class="time">After hike</div>
                       <div class="marker"><span>RST</span></div>
                       <div class="event">
-                        <b>Lakefront or complete rest</b>
+                        <b>Lakefront, food and full recovery</b>
                         <p>
-                          That Wānaka Tree and Station Park are the gentle
-                          default.
+                          No second major activity. Prepare the alternative hike
+                          only after checking everyone’s legs and the next-day
+                          forecast.
                         </p>
                       </div>
                     </div>
@@ -6498,26 +7429,27 @@
                     <div class="supply">
                       <small>Supply plan</small>
                       <p>
-                        At least 2 L water per person, lunch, snacks,
-                        waterproofs and first-aid kit.
+                        At least 2 L water per person for summit hikes, lunch,
+                        energy snacks, waterproofs, sun protection, first aid
+                        and trekking poles.
                       </p>
                     </div>
                     <div class="note">
                       <small>Operating note</small>
                       <p>
-                        Rob Roy and Isthmus can swap dates when the forecast and
-                        shuttle allow; both remain core activities.
+                        Roys Peak is required across the two days. Rob Roy and
+                        Isthmus are the alternatives for the second slot; do not
+                        attempt all three.
                       </p>
                     </div>
                   </div>
                   <details class="overnight-link">
                     <summary>
-                      <span>Overnight details</span
-                      ><b>Wānaka — 10 to 12 April</b>
+                      <span>Overnight details</span><b>Wānaka — 11 April</b>
                     </summary>
                     <div class="overnight-content">
-                      The full stay specification and alternatives are in the
-                      combined booking section.<br /><a href="#stay-wanaka"
+                      The booked Wānaka base covers both hiking windows.<br /><a
+                        href="#stay-wanaka"
                         >Open this overnight plan</a
                       >
                     </div>
@@ -6526,8 +7458,8 @@
               </article>
               <article
                 class="day-card region-south"
+                data-day-label="12 Apr — Wānaka hiking window 2 — choose the best conditions"
                 id="day-15"
-                data-day-label="12 Apr — Brownston breakfast — Isthmus Peak — recovery"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6539,84 +7471,200 @@
                       <span>Start: Wānaka</span><i></i
                       ><span>Night: Wānaka</span>
                     </div>
-                    <h3>Brownston breakfast — Isthmus Peak — recovery</h3>
+                    <h3>Wānaka hiking window 2 — choose the best conditions</h3>
                   </div>
                 </header>
                 <div class="booking-strip">
-                  <b>Book / confirm:</b><span>DOC alert and weather check</span>
+                  <b>Prepare / decide:</b
+                  ><span>Roys Peak if still outstanding</span
+                  ><span>Otherwise Rob Roy or Isthmus</span
+                  ><span>Weather + recovery check</span>
                 </div>
                 <div class="day-journey">
                   <span class="journey-stop"
-                    ><i>☕</i><b>Brownston cafés</b></span
+                    ><i>⭐</i><b>Roys if outstanding</b></span
                   ><span class="journey-arrow">›</span
-                  ><span class="journey-stop"><i>🥾</i><b>Isthmus Peak</b></span
+                  ><span class="journey-stop"
+                    ><i>🧊</i><b>Rob Roy choice</b></span
                   ><span class="journey-arrow">›</span
-                  ><span class="journey-stop"><i>😴</i><b>Recovery</b></span
+                  ><span class="journey-stop"
+                    ><i>🏔️</i><b>Isthmus choice</b></span
                   ><span class="journey-arrow">›</span
-                  ><span class="journey-stop"><i>⛺</i><b>Wānaka</b></span>
+                  ><span class="journey-stop"
+                    ><i>😴</i><b>West Coast prep</b></span
+                  >
                 </div>
                 <div class="day-body">
                   <div class="morning-grid">
-                    <div><small>Wake</small><b>06:30–06:45</b></div>
-                    <div><small>Breakfast</small><b>07:00–08:00</b></div>
                     <div>
-                      <small>Day anchor</small><b>Trail start about 08:45</b>
+                      <small>Wake</small><b>Based on the selected track</b>
                     </div>
+                    <div>
+                      <small>Breakfast</small
+                      ><b>Packed or café according to the start</b>
+                    </div>
+                    <div>
+                      <small>Day anchor</small
+                      ><b>Complete Roys, then one alternative</b>
+                    </div>
+                  </div>
+                  <div class="hike-decision">
+                    <strong>Two-day rule:</strong> Roys Peak is the must-do and
+                    goes on the clearest, lower-wind day. On the other day
+                    choose Rob Roy or Isthmus Peak using weather, access, leg
+                    recovery and group preference.
+                  </div>
+                  <div aria-label="Wānaka hike comparison" class="hike-options">
+                    <article class="hike-option must-do">
+                      <span class="hike-badge">Must do</span>
+                      <h4>Roys Peak</h4>
+                      <p>
+                        Iconic Lake Wānaka panorama and the trip’s priority
+                        summit hike.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>16 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>5–6 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Very hard</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>≈1,228 m</b><span>Elevation gain</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        Easy road access from Wānaka; parking can fill. Carry
+                        water, layers, food and poles for the descent.
+                      </div>
+                    </article>
+                    <article class="hike-option">
+                      <span class="hike-badge">Choose one</span>
+                      <h4>Rob Roy Glacier Track</h4>
+                      <p>
+                        Forest, river, swing bridge, waterfalls and
+                        hanging-glacier views.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>10 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>3–4 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Moderate</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Shuttle day</b><span>Access plan</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        Use a commercial Wānaka–Raspberry Creek shuttle if
+                        chosen; DOC access and creek conditions override the
+                        plan.
+                      </div>
+                    </article>
+                    <article class="hike-option">
+                      <span class="hike-badge">Choose one</span>
+                      <h4>Isthmus Peak</h4>
+                      <p>
+                        Long, exposed summit day with views across Lakes Wānaka
+                        and Hāwea.
+                      </p>
+                      <div class="hike-stats">
+                        <div class="hike-stat">
+                          <b>16 km return</b><span>Distance</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>5–7 hours</b><span>Walking time</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>Very hard</b><span>Physical effort</span>
+                        </div>
+                        <div class="hike-stat">
+                          <b>≈1,000 m</b><span>Elevation gain</span>
+                        </div>
+                      </div>
+                      <div class="hike-access">
+                        No reliable water on track. Choose only when everyone
+                        has recovered well and the second summit forecast is
+                        strong.
+                      </div>
+                    </article>
                   </div>
                   <div class="timeline">
                     <div class="timeline-row">
-                      <div class="time">07:00–08:00</div>
-                      <div class="marker"><span>BRK</span></div>
+                      <div class="time">Before breakfast</div>
+                      <div class="marker"><span>DEC</span></div>
                       <div class="event">
-                        <b>Breakfast at Brownston Street cafés</b>
+                        <b>Confirm the second-day choice</b>
                         <p>
-                          Check cloud, wind and the DOC alert before committing.
+                          If Roys Peak was not completed on 11 April, it takes
+                          priority today. Otherwise choose Rob Roy for variety
+                          or Isthmus for another summit.
                         </p>
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">08:00–08:45</div>
-                      <div class="marker"><span>DRV</span></div>
+                      <div class="time">Roys outstanding</div>
+                      <div class="marker"><span>MUST</span></div>
                       <div class="event">
-                        <b>Drive to the Isthmus Peak trailhead</b>
-                        <p>Park only in the designated area.</p>
+                        <b>Use today for Roys Peak</b>
+                        <p>
+                          Start around 07:00–07:30 and leave the other two
+                          tracks. Roys remains the non-negotiable Wānaka hike.
+                        </p>
                         <a
                           class="maps-link"
-                          href="https://www.google.com/maps/dir/?api=1&amp;origin=Brownston+Street%2C+Wanaka%2C+New+Zealand&amp;destination=Isthmus+Peak+Track+Car+Park%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
+                          href="https://www.google.com/maps/dir/?api=1&amp;origin=Wanaka%2C+New+Zealand&amp;destination=Roys+Peak+Track+Car+Park%2C+New+Zealand&amp;travelmode=driving"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">08:45–15:15 est.</div>
-                      <div class="marker"><span>MUST</span></div>
+                      <div class="time">Rob Roy choice</div>
+                      <div class="marker"><span>SHUT</span></div>
                       <div class="event">
-                        <b>Isthmus Peak Track</b>
+                        <b>Use the booked shuttle if access and weather suit</b>
                         <p>
-                          Allow 5–7 hours and major elevation gain. There is no
-                          reliable water supply on the track.
+                          This is the more varied and less exhausting second day
+                          after Roys Peak.
                         </p>
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">15:15–16:15</div>
-                      <div class="marker"><span>DRV</span></div>
+                      <div class="time">Isthmus choice</div>
+                      <div class="marker"><span>HIK</span></div>
                       <div class="event">
-                        <b>Return to Wānaka</b>
+                        <b>Use only with strong recovery and clear weather</b>
                         <p>
-                          Timing depends on pace, weather and the group’s
-                          condition.
+                          Allow 5–7 hours. Carry all water and use trekking
+                          poles for the descent.
                         </p>
+                        <a
+                          class="maps-link"
+                          href="https://www.google.com/maps/dir/?api=1&amp;origin=Wanaka%2C+New+Zealand&amp;destination=Isthmus+Peak+Track+Car+Park%2C+New+Zealand&amp;travelmode=driving"
+                          rel="noopener"
+                          target="_blank"
+                          >Open route</a
+                        >
                       </div>
                     </div>
                     <div class="timeline-row">
-                      <div class="time">16:15 onward</div>
-                      <div class="marker"><span>RST</span></div>
+                      <div class="time">Late afternoon</div>
+                      <div class="marker"><span>PREP</span></div>
                       <div class="event">
-                        <b>Rest, dinner and West Coast preparation</b>
-                        <p>No second major activity.</p>
+                        <b>Rest and prepare for Haast Pass</b>
+                        <p>
+                          Fuel, groceries and pack breakfast and lunch for the
+                          next road day.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -6624,27 +7672,26 @@
                     <div class="supply">
                       <small>Supply plan</small>
                       <p>
-                        At least 2 L water per person, lunch, snacks, rain
-                        shell, sun protection and trekking poles.
+                        Replenish water, trail food and recovery meals, then
+                        prepare the Haast Pass day bags.
                       </p>
                     </div>
                     <div class="note">
                       <small>Operating note</small>
                       <p>
-                        The café breakfast and a noon finish cannot both be
-                        kept; this plan uses a humane breakfast and realistic
-                        completion time.
+                        Final outcome: Roys Peak plus one of Rob Roy or Isthmus.
+                        Weather can swap the dates, but the route continues west
+                        on 13 April.
                       </p>
                     </div>
                   </div>
                   <details class="overnight-link">
                     <summary>
-                      <span>Overnight details</span
-                      ><b>Wānaka — 10 to 12 April</b>
+                      <span>Overnight details</span><b>Wānaka — 12 April</b>
                     </summary>
                     <div class="overnight-content">
-                      The full stay specification and alternatives are in the
-                      combined booking section.<br /><a href="#stay-wanaka"
+                      The booked Wānaka base covers both hiking windows.<br /><a
+                        href="#stay-wanaka"
                         >Open this overnight plan</a
                       >
                     </div>
@@ -6653,8 +7700,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-16"
                 data-day-label="13 Apr — Haast Pass — waterfalls — Fox Glacier"
+                id="day-16"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6701,8 +7748,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Wanaka%2C+New+Zealand&amp;destination=Fox+Glacier%2C+New+Zealand&amp;travelmode=driving&amp;waypoints=Lake+Hawea%2C+New+Zealand%7CBlue+Pools%2C+New+Zealand%7CFantail+Falls%2C+New+Zealand%7CThunder+Creek+Falls%2C+New+Zealand"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6810,8 +7857,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-17"
                 data-day-label="14 Apr — Lake Matheson dawn — Fox — Franz Josef — Hokitika"
+                id="day-17"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -6895,8 +7942,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Fox+Glacier%2C+New+Zealand&amp;destination=Franz+Josef%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6921,8 +7968,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Franz+Josef%2C+New+Zealand&amp;destination=Hokitika%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -6964,8 +8011,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-18"
                 data-day-label="15 Apr — Hokitika Gorge — Lake Kaniere — Pancake Rocks"
+                id="day-18"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -7014,8 +8061,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Hokitika%2C+New+Zealand&amp;destination=Hokitika+Gorge%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -7062,8 +8109,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Hokitika%2C+New+Zealand&amp;destination=Punakaiki%2C+New+Zealand&amp;travelmode=driving"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -7122,8 +8169,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-19"
                 data-day-label="16 Apr — Arthur’s Pass — Castle Hill — Christchurch"
+                id="day-19"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -7182,8 +8229,8 @@
                         <a
                           class="maps-link"
                           href="https://www.google.com/maps/dir/?api=1&amp;origin=Punakaiki%2C+New+Zealand&amp;destination=Christchurch%2C+New+Zealand&amp;travelmode=driving&amp;waypoints=Arthur%E2%80%99s+Pass%2C+New+Zealand%7CCastle+Hill%2C+New+Zealand"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Open route</a
                         >
                       </div>
@@ -7264,8 +8311,8 @@
               </article>
               <article
                 class="day-card region-south"
-                id="day-20"
                 data-day-label="17 Apr — Final clean — campervan return — airport hotel"
+                id="day-20"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -7388,8 +8435,8 @@
               </article>
               <article
                 class="day-card region-flight"
-                id="flight-day"
                 data-day-label="18 Apr — Christchurch — Singapore — Bengaluru"
+                id="flight-day"
               >
                 <header class="day-header">
                   <div class="date-block">
@@ -7405,7 +8452,8 @@
                   </div>
                 </header>
                 <div class="booking-strip">
-                  <b>Book / confirm:</b><span>SQ298</span><span>SQ510</span>
+                  <b>Confirmed:</b><span>SQ298 · confirmed</span
+                  ><span>SQ510 · confirmed</span>
                 </div>
                 <div class="day-journey">
                   <span class="journey-stop"><i>✈️</i><b>Christchurch</b></span
@@ -7490,9 +8538,9 @@
         </details>
       </section>
       <footer class="footer">
-        <strong>New Zealand Roadmap 2027</strong> · All timings are planning
-        windows. Ticketed times, operator instructions, road conditions and
-        signed rental terms take precedence.
+        <strong>New Zealand Roadmap 2027</strong> · Departure countdown targets
+        27 March 2027 at 17:20 IST. Timed activities, road conditions and signed
+        rental terms still take precedence.
       </footer>
     </main>
     <script>
@@ -7658,6 +8706,81 @@
           if (e.key === "Escape") setPinned(false);
         });
         build();
+      })();
+    </script>
+    <script id="trip-countdown-script">
+      (function () {
+        const departure = new Date("2027-03-27T17:20:00+05:30");
+        const tripEnd = new Date("2027-04-18T21:50:00+05:30");
+        const bar = document.getElementById("tripCountdownBar");
+        const hero = document.getElementById("overview");
+        const parts = {
+          days: document.getElementById("cdDays"),
+          hours: document.getElementById("cdHours"),
+          minutes: document.getElementById("cdMinutes"),
+          seconds: document.getElementById("cdSeconds"),
+          status: document.getElementById("countdownStatus"),
+          calendarDays: document.getElementById("calendarDays"),
+          calendarKicker: document.getElementById("calendarKicker"),
+          calendarUnit: document.getElementById("calendarUnit"),
+        };
+        const pad = (n) => String(Math.max(0, n)).padStart(2, "0");
+        function update() {
+          const now = new Date();
+          if (now < departure) {
+            const diff = departure - now;
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            parts.days.textContent = String(d).padStart(3, "0");
+            parts.hours.textContent = pad(h);
+            parts.minutes.textContent = pad(m);
+            parts.seconds.textContent = pad(s);
+            parts.calendarDays.textContent = Math.ceil(diff / 86400000);
+            parts.calendarKicker.textContent = "IN";
+            parts.calendarUnit.textContent = "DAYS";
+            bar.classList.remove("trip-live", "trip-complete");
+          } else if (now <= tripEnd) {
+            const day = Math.min(
+              23,
+              Math.floor((now - departure) / 86400000) + 1,
+            );
+            parts.status.textContent =
+              "ADVENTURE UNDERWAY · DAY " + day + " OF 23";
+            parts.calendarDays.textContent = "GO!";
+            parts.calendarKicker.textContent = "THE";
+            parts.calendarUnit.textContent = "ADVENTURE IS ON";
+            bar.classList.add("trip-live");
+            bar.classList.remove("trip-complete");
+          } else {
+            parts.status.textContent =
+              "ADVENTURE COMPLETE · 23 UNFORGETTABLE DAYS";
+            parts.calendarDays.textContent = "✓";
+            parts.calendarKicker.textContent = "TRIP";
+            parts.calendarUnit.textContent = "COMPLETE";
+            bar.classList.add("trip-complete");
+            bar.classList.remove("trip-live");
+          }
+        }
+        update();
+        setInterval(update, 1000);
+        if ("IntersectionObserver" in window && hero) {
+          new IntersectionObserver(
+            (entries) => {
+              bar.classList.toggle("visible", !entries[0].isIntersecting);
+            },
+            { threshold: 0.08 },
+          ).observe(hero);
+        } else {
+          const toggle = () =>
+            bar.classList.toggle(
+              "visible",
+              window.scrollY > (hero?.offsetHeight || 400),
+            );
+          window.addEventListener("scroll", toggle, { passive: true });
+          toggle();
+        }
       })();
     </script>
   </body>
